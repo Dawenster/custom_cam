@@ -1,1 +1,6 @@
-Welcome
+<% if current_user.photographer %>
+<h1>Your photos</h1>
+
+<% else %>
+<h1>Your contests</h1>
+<% end %>

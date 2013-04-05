@@ -3,8 +3,8 @@ FactoryGirl.define do
   factory :photo do
     description Faker::Lorem.sentence
     url "/path/image.jpg"
-    contest
-    user
+    contest_id
+    user_id
   end
 
   factory :user do

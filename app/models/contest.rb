@@ -1,7 +1,8 @@
 class Contest < ActiveRecord::Base
   attr_accessible :title, :description, :category_id,
                   :price, :duration, :creator_id
-  belongs_to :user
+  
+  belongs_to :user, :foreign_key => :creator_id
   belongs_to :category
   has_many :photos
 

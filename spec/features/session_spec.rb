@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 
-describe "user login", :js => true do
+describe "user login" do
   let(:user) { FactoryGirl.create(:user) }
 
   it "is successful" do
@@ -9,7 +9,7 @@ describe "user login", :js => true do
     fill_in "user_email", with: user.email
     fill_in "user_password", with: user.password
     click_button "Sign in"
-    page.should have_content "Welcome"
+    page.should have_content "Logout"
   end
 
   it "logs out" do
@@ -18,7 +18,7 @@ describe "user login", :js => true do
     fill_in "user_password", with: user.password
     click_button "Sign in"
     click_link "Logout"
-    page.should have_content "Sign"
+    page.should have_content "Login"
   end
 
 end
