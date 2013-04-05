@@ -1,5 +1,5 @@
 CustomCam::Application.routes.draw do
-  
+  root :to => "users#new"
   resources :users
   resources :sessions, :only => [:new, :create, :destroy]
   # The priority is based upon order of creation:
