@@ -2,7 +2,10 @@ CustomCam::Application.routes.draw do
   root :to => "users#new"
   resources :users
   resources :sessions, :only => [:new, :create, :destroy]
-  resources :photos
+
+  resources :categories, :only => [:index, :show]
+  resources :contests
+  resources :photos # :except => [:edit, :update]
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
