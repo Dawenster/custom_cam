@@ -5,6 +5,7 @@ class CreateContests < ActiveRecord::Migration
       t.text    :description
       t.integer :category_id
       t.integer :price
+      # MISSING DURATION
       t.integer :creator_id
 
       t.timestamps
