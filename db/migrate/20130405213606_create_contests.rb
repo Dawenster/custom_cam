@@ -3,7 +3,7 @@ class CreateContests < ActiveRecord::Migration
     create_table :contests do |t|
       t.string  :title
       t.text    :description
-      t.string  :category
+      t.integer :category_id
       t.integer :price
       t.integer :creator_id
 
