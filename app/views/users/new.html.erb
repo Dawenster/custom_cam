@@ -1,0 +1,13 @@
+<h1>Sign Up</h1>
+
+<%= form_for @user do |f| %>
+  <%= f.text_field :username, placeholder: "Username" %>
+  <%= f.text_field :email, placeholder: "Email" %>
+  <%= f.text_field :password, placeholder: "Password" %>
+  <%= f.text_field :password_confirmation, placeholder: "Password Again" %>
+  <%= radio_button_tag(:type, "Client") %>
+  <%= label_tag(:type, "I am a client") %>
+  <%= radio_button_tag(:type, "Photographer") %>
+  <%= label_tag(:type, "I am a photographer") %>
+  <%= f.submit "Create account" %>
+<% end %>
