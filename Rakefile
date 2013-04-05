@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-NinetyNinePhotoz::Application.load_tasks
+CustomCam::Application.load_tasks
