@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(:version => 20130405185521) do
     t.string   "username"
     t.string   "email"
     t.string   "password_digest"
-    t.boolean  "type"
+    t.boolean  "photographer"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
   end

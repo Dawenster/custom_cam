@@ -6,8 +6,8 @@
   <%= f.text_field :password, placeholder: "Password" %>
   <%= f.text_field :password_confirmation, placeholder: "Password Again" %>
   <%= radio_button_tag(:type, "Client") %>
-  <%= label_tag(:type, "I am a client") %>
+  <%= label_tag(:photographer, "I am a client") %>
   <%= radio_button_tag(:type, "Photographer") %>
-  <%= label_tag(:type, "I am a photographer") %>
+  <%= label_tag(:photographer, "I am a photographer") %>
   <%= f.submit "Create account" %>
 <% end %>
