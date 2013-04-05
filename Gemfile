@@ -12,6 +12,8 @@ gem 'bcrypt-ruby'
 gem 'bootstrap-sass'
 gem 'carrierwave'
 gem 'cloudinary'
+gem 'pg'
+
 
 # Gems used only for assets and not required
 # in production environments by default.
