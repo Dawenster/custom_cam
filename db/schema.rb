@@ -11,7 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130405185521) do
+ActiveRecord::Schema.define(:version => 20130405213606) do
+
+  create_table "contests", :force => true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.string   "category"
+    t.integer  "price"
+    t.integer  "creator_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "photos", :force => true do |t|
     t.text     "description"
@@ -22,7 +32,6 @@ ActiveRecord::Schema.define(:version => 20130405185521) do
     t.datetime "updated_at",  :null => false
   end
 
-
   create_table "users", :force => true do |t|
     t.string   "username"
     t.string   "email"
@@ -31,7 +40,5 @@ ActiveRecord::Schema.define(:version => 20130405185521) do
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
   end
-
-
 
 end
