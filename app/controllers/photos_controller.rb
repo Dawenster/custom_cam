@@ -7,11 +7,12 @@ class PhotosController < ApplicationController
   def create
     p = Photo.new
     p.url = params[:file]
+    p.contest_id = params[:contest_id]
     p.user_id = current_user.id
     p.save!
 
     # Cloudinary::Uploader.upload(params[:file]) WOW WE TOTALLY DONT NEED THIS WOW
-    redirect_to root_path
+    redirect_to contest_path(p.contest)
   end
 
   def edit

@@ -6,11 +6,14 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(params[:user])
-    if params[:user][:photographer] == "Photographer"
+    puts params.inspect
+    if params[:photographer] == "Photographer"
       @user.photographer = true
-    elsif params[:user][:photographer] == "Client"
+    elsif params[:photographer] == "Client"
       @user.photographer = false
     end
+
+    @user.save
 
     if params[:user][:password] == params[:user][:password_confirmation] && @user.save
       session[:id] = @user.id
