@@ -1,0 +1,25 @@
+<div class="photo_show">
+<%= image_tag @photo.url %>
+
+<ul class="comments">
+  <% @photo.comments.each do |comment| %>
+  <li><%= comment.content %>
+    Posted by: <%= comment.user.username %> 
+    <% if comment.user == current_user %>
+      <%= link_to '', photo_comment_path(@photo, comment), 
+          :class => 'icon-remove', :remote => true, :method => 'delete' %>
+    <% end %>
+  </li>
+  <% end %>
+</ul>
+
+<p>Add new comment:</p>
+  <%= form_for [@photo, Comment.new], :remote => true do |f| %>
+    <%= f.label :content %>
+    <%= f.text_field :content, :placeholder => "Comment" %><br>
+    <%= f.submit "Submit", :class => "btn btn-primary" %>
+  <% end %>
+
+<%= link_to "Back to Contest", contest_path(@photo.contest) %>
+</div>
+
