@@ -1,7 +1,7 @@
 <div class="row">
   <div class="span5">
-    <strong>Days Left:<%= humanize(@time_left) %></strong>
     <h1><%= @contest.title %></h1>
+    <p><strong><%= @time_left > 0 ? ("Days Left :" + humanize(@time_left) ) : "CONTEST OVER" %></strong></p>
     <p><strong>Created By:</strong> <%= User.find(@contest.creator_id).username %></p>
     <p><strong>Category:</strong> <%= @contest.category.title %></p>
     <p><strong>Description:</strong> <%= @contest.description %></p>
@@ -81,7 +81,7 @@
       <% unless photo == @winning_photo %>
         <div class="each-photo-submission">
           <div class="photo-and-button">
-            <% unless @winning_photo %><button type="button" class="btn btn-large btn-success winner-button hide" data-photo="<%= photo.id %>" data-contest="<%= @contest.id %>">Select as winner</button><% end %>
+            <% unless @winning_photo || @time_left > 0 %><button type="button" class="btn btn-large btn-success winner-button hide" data-photo="<%= photo.id %>" data-contest="<%= @contest.id %>">Select as winner</button><% end %>
             <a data-toggle="lightbox" href="#<%= dom_id(photo) %>">
               <%= cl_image_tag photo.url, :width => 500, :height => 400, :gravity => :face, :crop => :thumb %>
             </a>  
