@@ -55,7 +55,8 @@
           </div>
         </div>
       </div>
-      <a data-toggle="lightbox" href="#<%= dom_id(photo) %>"><%= image_tag(photo.url) %></a>  
+      <a data-toggle="lightbox" href="#<%= dom_id(photo) %>">
+        <%= cl_image_tag photo.url, :width => 500, :height => 400, :gravity => :face, :crop => :thumb %></a>  
 
       <li><%= photo.description %></li>
       <li>Submitted by: <%= photo.user.username %></li> 

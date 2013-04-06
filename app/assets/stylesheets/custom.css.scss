@@ -1,5 +1,89 @@
 @import "bootstrap";
 
+@mixin box_sizing {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* universal */
+
+html {
+  overflow-y: scroll;
+}
+
+body {
+  padding-top: 60px;
+}
+
+section {
+  overflow: auto;
+}
+
+/* Why doesn't this work on just input, textarea, etc? */
+input#question_title, textarea#question_content, textarea#answer_content {
+  width: 560px;
+
+}
+textarea#answer_content {
+  height: 5em;
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1;
+}
+
+h1 {
+  font-size: 3em;
+  letter-spacing: -2px;
+  margin-bottom: 30px;
+}
+
+h2 {
+  font-size: 1.7em;
+  letter-spacing: -1px;
+  margin-bottom: 30px;
+  text-align: center;
+  font-weight: normal;
+  color: $grayLight;
+}
+
+p {
+  font-size: 1.1em;
+  line-height: 1.7em;
+}
+
 li {
   list-style: none;
+}
+
+/* header */
+
+#logo {
+  float: left;
+  margin-right: 10px;
+  font-size: 2.6em;
+  /*color: white;*/
+  /*text-transform: uppercase;*/
+  letter-spacing: -1px;
+
+  font-weight: bold;
+  line-height: 1;
+  &:hover {
+    text-decoration:none;
+  }
+}
+
+#logo_text a {
+  padding-top: 20px;
+  color: #91C46C;
+  font-family: 'Sansita One';
+  font-size: 3.4em;
+  letter-spacing: -3px;
+  text-shadow: 1px 1px 1px #000;
+}
+
+.navbar .nav > li > a {
+padding: 28px 15px 20px;
 }

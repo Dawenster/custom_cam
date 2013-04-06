@@ -1,10 +1,28 @@
-<h3><%= link_to raw('&copy;ustom &copy;am&trade;'), root_path %></h3>
-<% if current_user %>
-  <%= link_to "Logout", session_path(session[:id]), :method => :delete %>
-  <%= link_to "Add Contest", new_contest_path %>
-  <%= link_to "Find a Contest", categories_path %>
-  <%= link_to "Profile", user_path(current_user) %>
-<% else %>
-  <%= link_to "Login", new_session_path %>
-  <%= link_to "Sign up", new_user_path %>
-<% end %>
+<header class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <div id="logo_picture">
+        <%= link_to image_tag('logo.png'), root_path, id: 'logo' %>
+      </div>
+      <div id="logo_text">
+        <%= link_to "CustomCam", root_path, id: 'logo' %>
+      </div>
+      <nav>
+        <ul class="nav pull-right">
+          <% if current_user %>
+            <li><%= link_to "Add Contest", new_contest_path %></li>
+            <li><%= link_to "Find a Contest", categories_path %></li>
+            <li><%= link_to "Profile: " + current_user.username, user_path(current_user) %></li>
+            <li><%= link_to "Logout", session_path(session[:id]), :method => :delete %></li>
+          <% else %>
+            <li><%= link_to "Login", new_session_path %></li>
+            <li><%= link_to "Sign up", new_user_path %></li>
+          <% end %>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+
+
+
