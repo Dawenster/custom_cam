@@ -15,4 +15,6 @@
 /tmp
 
 /config/initializers/cloudinary.rb
+/config/cloudinary.yml
+
 /public/uploads/tmp/
