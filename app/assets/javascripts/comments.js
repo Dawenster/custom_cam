@@ -11,8 +11,9 @@ var Comment = {
     
   appendComment: function(event, data) {
     $('li#comment_errors').hide();
-    $('ul.comments').append('<li>' + data.comment.content + '</li>');
-    $('ul.comments').append('Posted by: ' + data.user.username); //Can add deleteIcon in the future
+    debugger
+    $(this).siblings("ul").append('<li>' + data.comment.content + '</li>');
+    $(this).siblings("ul").append('Posted by: ' + data.user.username); //Can add deleteIcon in the future
   },
 
   showErrors: function(xhr, data, status) {

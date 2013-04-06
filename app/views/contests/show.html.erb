@@ -11,6 +11,8 @@
     <%= form_tag photos_path, :method => 'post', :multipart => true do %>
       <label for="file">File to Upload</label> <%= file_field_tag "file" %>
       <%= hidden_field_tag :contest_id, params[:id] %>
+      <%= label_tag(:description, "Description:") %>
+      <%= text_area_tag(:description) %>
       <%= submit_tag %>
     <% end %>
 
@@ -42,7 +44,40 @@
     <p>Submissions:</p>
 
     <% @photos.reverse.each do |photo| %>
-      <li><%= image_tag photo.url %></li>
+
+      <div id="<%= dom_id(photo) %>" class="lightbox hide fade"  tabindex="-1" role="dialog" aria-hidden="true">
+        <div class='lightbox-header'>
+          <button type="button" class="close" data-dismiss="lightbox" aria-hidden="true">&times;</button>
+        </div>
+        <div class='lightbox-content'>
+          <%= image_tag photo.url %>
+
+            <p><%= photo.description %></p>
+
+            
+            <ul class="comments">
+              <% photo.comments.each do |comment| %>
+              <li><%= comment.content %>
+                Posted by: <%= comment.user.username %> 
+                <% if comment.user == current_user %>
+                  <%= link_to '', contest_comment_path(@contest, comment), 
+                      :class => 'icon-remove', :remote => true, :method => 'delete' %>
+                <% end %>
+              </li>
+              <% end %>
+            </ul>
+          
+            <%= form_for [photo, Comment.new], :remote => true do |f| %>
+              <%= f.label :content %>
+              <%= f.text_field :content, :placeholder => "Comment" %><br>
+              <%= f.submit "Submit", :class => "btn btn-primary" %>
+            <% end %>
+
+        </div>
+      </div>
+
+      <a data-toggle="lightbox" href="#<%= dom_id(photo) %>"><%= image_tag(photo.url) %></a>  
+
       <li><%= photo.description %></li>
       <li>Submitted by: <%= photo.user.username %></li> 
     <% end %>

@@ -9,6 +9,7 @@ class PhotosController < ApplicationController
     p.url = params[:file]
     p.contest_id = params[:contest_id]
     p.user_id = current_user.id
+    p.description = params[:description]
     p.save!
 
     # Cloudinary::Uploader.upload(params[:file]) WOW WE TOTALLY DONT NEED THIS WOW

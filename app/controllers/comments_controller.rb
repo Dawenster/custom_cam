@@ -1,7 +1,12 @@
 class CommentsController < ApplicationController
   def create
-    @contest = Contest.find(params[:contest_id])
-    @comment = @contest.comments.build(:content => params[:comment][:content])
+    if params[:contest_id]
+      @commentable = Contest.find(params[:contest_id])
+    else
+      @commentable = Photo.find(params[:photo_id])
+    end
+
+    @comment = @commentable.comments.build(:content => params[:comment][:content])
     @comment.user = current_user
 
     if @comment.save
