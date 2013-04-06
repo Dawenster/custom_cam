@@ -42,6 +42,16 @@ describe "profile page", :js => true do
     page.should have_content("Welcome " + client.username)
   end
 
+  context "nil level of loggable in-ness"
+  it "should display error when logging in with incorrect gavin" do
+    visit new_session_path
+    fill_in "user_email", with: "penis"
+    fill_in "user_password", with: "1"
+    click_button "Sign in"
+    page.should have_content "Invalid"
+  end
+end
+
   # context "is photographer"
   #   it "shows contests user submitted photos to" do
   #     visit new_session_path
@@ -60,4 +70,4 @@ describe "profile page", :js => true do
   #   click_button "Sign in"
   #   page.should have_content photo.description
   # end
-end
+
