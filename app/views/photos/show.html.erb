@@ -16,7 +16,7 @@
 <p>Add new comment:</p>
   <%= form_for [@photo, Comment.new], :remote => true do |f| %>
     <%= f.label :content %>
-    <%= f.text_field :content, :placeholder => "Comment" %><br>
+    <%= f.text_area :content, :placeholder => "Comment" %><br>
     <%= f.submit "Submit", :class => "btn btn-primary" %>
   <% end %>
 
