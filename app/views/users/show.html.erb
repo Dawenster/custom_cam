@@ -21,15 +21,18 @@
 
   <% else %>
   <h1>Your contests</h1>
+  <h2>Welcome <%= current_user.username %></h2>
 
-<div>
-  <% current_user.contests.each do |contest| %>
-    <div><%= link_to contest.title, contest %></div>
-    <div>Created by: <%= contest.user.username %></div>
-    <div>Category: <%= contest.category.title %></div>
-    <div>Price: $<%= contest.price %></div>
-    <div>Description: <%= contest.description %></div>
-  <% end %>
-</div>
+  <div>
+    <% current_user.contests.reverse.each do |contest| %>
+      <ul>
+        <li><h3 class="contest_title"><%= link_to contest.title, contest %></h3></li>
+        <li>Created by: <%= contest.user.username %></li>
+        <li>Category: <%= contest.category.title %></li>
+        <li>Price: $<%= contest.price %></li>
+        <li>Description: <%= contest.description %></li>
+      </ul>
+    <% end %>
+  </div>
 
 <% end %>
