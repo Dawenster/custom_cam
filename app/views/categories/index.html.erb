@@ -1,7 +1,9 @@
-<h1>Browse all Categories</h1>
-<% @categories.each do |category| %>
-  <%= link_to category.title, category %>
-<% end %>
+<h1>Browse All Categories</h1>
+<ul class="category_list">
+  <% @categories.each do |category| %>
+    <li><%= link_to category.title, category %></li>
+  <% end %>
+</ul>
 
 <h3>Most Recent Image:</h3>
 <%= image_tag Photo.last.url %>
