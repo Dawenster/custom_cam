@@ -3,4 +3,5 @@
   <%= link_to category.title, category %>
 <% end %>
 
-<img src="<%= Photo.last.url %>">
+<h3>Most Recent Image:</h3>
+<%= image_tag Photo.last.url %>
