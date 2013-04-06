@@ -66,6 +66,29 @@ li {
   color: #a2a2a2;
 }
 
+/*contest page*/
+
+.each-photo-submission {
+  margin-bottom: 20px;
+  width: 500px;
+}
+
+.photo-and-button {
+  position: relative;
+}
+
+.winner-button {
+  position: absolute;
+  left: 165px;
+}
+
+.ribbon {
+  position: absolute;
+  right: -50px;
+  top: -50px;
+}
+
+
 /* header */
 
 #logo {

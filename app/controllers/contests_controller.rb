@@ -6,6 +6,7 @@ class ContestsController < ApplicationController
     @contest = Contest.find(params[:id])
     @time_left = @contest.created_at + (@contest.duration * 86400) - Time.now
     @photos = Photo.where('contest_id =?', params[:id])
+    @winning_photo = Photo.find(@contest.winning_photo_id) if @contest.winning_photo_id
     @comments = @contest.comments
   end
 
@@ -35,5 +36,12 @@ class ContestsController < ApplicationController
       @categories = Category.all
       render :new
     end
+  end
+
+  def update
+    photo = Photo.find(params[:photo])
+    contest = photo.contest
+    contest.update_attributes(:winning_photo_id => photo.id)
+    render :json => { :contest => contest }
   end
 end

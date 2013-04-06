@@ -46,7 +46,24 @@
   </div>
 
   <div class="span7">
-    <h1>Submissions:</h1>
+    <% if @winning_photo %>
+      <h1>Winner!</h1>
+      
+      <div class="each-photo-submission">
+        <div class="photo-and-button">
+          <a data-toggle="lightbox" href="#<%= dom_id(@winning_photo) %>">
+          <div class="ribbon"><%= image_tag 'winner.png', :width => 100, :height => 100 %></div>
+          <%= cl_image_tag @winning_photo.url, :width => 500, :height => 400, :gravity => :face, :crop => :thumb %></a>
+        </div>
+        <li><%= @winning_photo.description %></li>
+        <div class="posted_by">
+          Submitted by: <%= @winning_photo.user.username %>
+        </div> 
+        <li><%= link_to @winning_photo.comments.count.to_s + ' comments', @winning_photo %></li>
+      </div>
+    <% end %>
+
+    <h1>All submissions</h1>
 
     <% @photos.reverse.each do |photo| %>
       <div id="<%= dom_id(photo) %>" class="lightbox hide fade"  tabindex="-1" role="dialog" aria-hidden="true">
@@ -60,17 +77,22 @@
           </div>
         </div>
       </div>
-      <a data-toggle="lightbox" href="#<%= dom_id(photo) %>">
-        <%= cl_image_tag photo.url, :width => 500, :height => 400, :gravity => :face, :crop => :thumb %></a>  
-
-      <li><%= photo.description %></li>
-      <div class="posted_by">
-        Submitted by: <%= photo.user.username %>
-      </div> 
-      <li><%= link_to photo.comments.count.to_s + ' comments', photo %></li>
-
-
-
+      
+      <% unless photo == @winning_photo %>
+        <div class="each-photo-submission">
+          <div class="photo-and-button">
+            <% unless @winning_photo %><button type="button" class="btn btn-large btn-success winner-button hide" data-photo="<%= photo.id %>" data-contest="<%= @contest.id %>">Select as winner</button><% end %>
+            <a data-toggle="lightbox" href="#<%= dom_id(photo) %>">
+              <%= cl_image_tag photo.url, :width => 500, :height => 400, :gravity => :face, :crop => :thumb %>
+            </a>  
+          </div>
+          <li><%= photo.description %></li>
+          <div class="posted_by">
+            Submitted by: <%= photo.user.username %>
+          </div> 
+          <li><%= link_to photo.comments.count.to_s + ' comments', photo %></li>
+        </div>
+      <% end %>
     <% end %>
   </div>
 </div>
