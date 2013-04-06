@@ -4,15 +4,18 @@
 <p><%= @contest.category.title %></p>
 <p>Bounty: <%= @contest.price %></p>
 <p>Time left: CONTEST DURATION</p>
-<p>Submissions:</p>
-<% @photos.each do |photo| %>
-  <li><%= image_tag photo.url %></li>
-  <li><%= photo.description %></li>
-  <li>Submitted by: <%= photo.user.username %></li> 
-<% end %>
 
 <%= form_tag photos_path, :method => 'post', :multipart => true do %>
   <label for="file">File to Upload</label> <%= file_field_tag "file" %>
   <%= hidden_field_tag :contest_id, params[:id] %>
   <%= submit_tag %>
 <% end %>
+
+<p>Submissions:</p>
+
+<% @photos.reverse.each do |photo| %>
+  <li><%= image_tag photo.url %></li>
+  <li><%= photo.description %></li>
+  <li>Submitted by: <%= photo.user.username %></li> 
+<% end %>
+

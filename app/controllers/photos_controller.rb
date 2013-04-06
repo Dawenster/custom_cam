@@ -12,7 +12,7 @@ class PhotosController < ApplicationController
     p.save!
 
     # Cloudinary::Uploader.upload(params[:file]) WOW WE TOTALLY DONT NEED THIS WOW
-    redirect_to root_path
+    redirect_to contest_path(p.contest)
   end
 
   def edit

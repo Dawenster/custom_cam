@@ -3,8 +3,9 @@ Welcome <%= current_user.username %>
 <% if current_user.photographer %>
   <h1>Your photos</h1>
   <% current_user.photos.each do |photo| %>
+    <%= photo.contest.title %>
+    <%= image_tag photo.url %>
     <%= photo.description %>
-
   <% end %>
 
   <% else %>
