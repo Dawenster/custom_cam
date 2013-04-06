@@ -8,15 +8,17 @@
     <p><strong>Bounty:</strong> $<%= @contest.price %></p>
     <p><strong>Time left:</strong> TODO: CONTEST DURATION</p>
 
-    <%= form_tag photos_path, :method => 'post', :multipart => true do %>
-      <label for="file"><h3>Submit a Photo</h3></label>
-      <%= file_field_tag "file" %>
-      <%= hidden_field_tag :contest_id, params[:id] %>
-      <div id="input_desc">
-        <%= label_tag(:description, "Photo Description:") %>
-        <%= text_area_tag(:description) %>
-        <%= submit_tag "Submit!", :class => "btn btn-primary" %>
-      </div>
+    <% if @time_left > 0 && current_user.photographer %>
+      <%= form_tag photos_path, :method => 'post', :multipart => true do %>
+        <label for="file"><h3>Submit a Photo</h3></label>
+        <%= file_field_tag "file" %>
+        <%= hidden_field_tag :contest_id, params[:id] %>
+        <div id="input_desc">
+          <%= label_tag(:description, "Photo Description:") %>
+          <%= text_area_tag(:description) %>
+          <%= submit_tag "Submit!", :class => "btn btn-primary" %>
+        </div>
+      <% end %>
     <% end %>
 
     <h3>Contest Comments (<%= @comments.count %>):</h3>
@@ -81,7 +83,7 @@
       <% unless photo == @winning_photo %>
         <div class="each-photo-submission">
           <div class="photo-and-button">
-            <% unless @winning_photo || @time_left > 0 %><button type="button" class="btn btn-large btn-success winner-button hide" data-photo="<%= photo.id %>" data-contest="<%= @contest.id %>">Select as winner</button><% end %>
+            <% if @winning_photo == nil && @time_left < 0 && current_user == @contest.user %><button type="button" class="btn btn-large btn-success winner-button hide" data-photo="<%= photo.id %>" data-contest="<%= @contest.id %>">Select as winner</button><% end %>
             <a data-toggle="lightbox" href="#<%= dom_id(photo) %>">
               <%= cl_image_tag photo.url, :width => 500, :height => 400, :gravity => :face, :crop => :thumb %>
             </a>  
