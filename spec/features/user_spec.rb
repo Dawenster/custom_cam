@@ -17,6 +17,7 @@ describe "profile page", :js => true do
   let(:photographer) { FactoryGirl.create(:user, :photographer => true) }
 
   let!(:contest) { FactoryGirl.create(:contest, :creator_id => client.id) }
+  # let!(:photo_contest) { FactoryGirl.create(:contest, :creator_id => )}
   # let(:photo) { mock("photo", :description => "ABC") }
 
   context "is client"
@@ -27,6 +28,29 @@ describe "profile page", :js => true do
     click_button "Sign in"
     page.should have_content contest.title
   end
+
+  context "navbaaaaaaaar"
+  it "should change navbar to reflect logged in-ness when user logs in" do
+    visit new_session_path
+    fill_in "user_email", with: client.email
+    fill_in "user_password", with: client.password
+    click_button "Sign in"
+    page.should have_content "Logout"
+    page.should have_content "Add Contest"
+    page.should have_content "Find a Contest"
+    page.should have_content "Profile"
+    page.should have_content("Welcome " + client.username)
+  end
+
+  # context "is photographer"
+  #   it "shows contests user submitted photos to" do
+  #     visit new_session_path
+  #     fill_in "user_email", with: photographer.email
+  #     fill_in "user_password", with: photographer.password
+  #     click_button "Sign in"
+  #     page.should have_content photo_contest.title
+  #   end
+  
 
   # context "is photographer"
   # it "shows all photos" do
