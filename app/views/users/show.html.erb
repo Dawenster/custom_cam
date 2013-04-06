@@ -4,7 +4,7 @@ Welcome <%= current_user.username %>
   <h1>Your photos</h1>
   <% current_user.photos.reverse.each do |photo| %>
     <ul>
-      <li><h3>Contest: <%= photo.contest.title %></h3></li>
+      <li><h3><%= link_to "Contest: " + photo.contest.title, photo.contest %></h3></li>
       <li><%= image_tag photo.url %></li>
       <% unless photo.description = "" %>
         <li><%= photo.description %></li>
