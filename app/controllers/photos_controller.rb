@@ -10,8 +10,8 @@ class PhotosController < ApplicationController
     p.user_id = current_user.id
     p.save!
 
-    Cloudinary::Uploader.upload(params[:file][:filename], :public_id => 'mcchillinstaburger29323')
-
+    # Cloudinary::Uploader.upload(params[:file]) WOW WE TOTALLY DONT NEED THIS WOW
+    redirect_to root_path
   end
 
   def edit
