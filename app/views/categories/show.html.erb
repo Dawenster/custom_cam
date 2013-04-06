@@ -1,6 +1,6 @@
 <h1>Fair enough, Rails, you ass: <%= @category.title %></h1>
 <% @category.contests.each do |contest| %>
-  <li><%= contest.title %></li>
+  <li><%= link_to contest.title, contest %></li>
   <li>Price: <%= contest.price %></li>
   <li>Posted by: <%= User.find(contest.creator_id).username %></li>
 <% end %>

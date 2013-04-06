@@ -1,0 +1,12 @@
+<h1><%= @contest.title %></h1>
+<p>Created By: <%= User.find(@contest.creator_id).username %></p>
+<p><%= @contest.description %></p>
+<p><%= @contest.category.title %></p>
+<p>Bounty: <%= @contest.price %></p>
+<p>Time left: CONTEST DURATION</p>
+<p>Submissions:</p>
+<% @photos.each do |photo| %>
+  <li><%= link_to 'PHOTO WOULD BE HERE', photo %></li>
+  <li><%= photo.description %></li>
+  <li>Submitted by: <%= photo.user.username %></li> 
+<% end %>
