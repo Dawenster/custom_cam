@@ -5,6 +5,7 @@
   <%= f.label :title %>
   <%= f.text_field :title %>
   <%= f.label :description%>
+  <%= f.select :category, @categories.map { |c| [c.title, c.id] } %>
   <%= f.text_area :description, :placeholder => "Enter your contest details here" %>
   <%= f.label :price %>
   <%= f.text_field :price %>

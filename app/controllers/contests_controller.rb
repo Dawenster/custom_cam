@@ -9,19 +9,21 @@ class ContestsController < ApplicationController
 
   def new
     @contest = Contest.new
+    @categories = Category.all
   end
 
   def create
     @contest = Contest.new(:title => params[:contest][:title],
                            :description => params[:contest][:description],
                            :price => params[:contest][:price].to_i,
-                           :category_id => 1, # TODO: THIS IS HARDCODED
-                           :creator_id => 1)
+                           :category_id => params[:contest][:category],
+                           :creator_id => current_user.id)
 
     if @contest.save
       redirect_to contest_path(@contest)
     else
       flash.now[:alert] = @contest.errors.full_messages.join(",")
+      @categories = Category.all
       render :new
     end
   end
