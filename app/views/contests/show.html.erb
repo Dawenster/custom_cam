@@ -44,42 +44,25 @@
     <p>Submissions:</p>
 
     <% @photos.reverse.each do |photo| %>
-
       <div id="<%= dom_id(photo) %>" class="lightbox hide fade"  tabindex="-1" role="dialog" aria-hidden="true">
         <div class='lightbox-header'>
           <button type="button" class="close" data-dismiss="lightbox" aria-hidden="true">&times;</button>
         </div>
         <div class='lightbox-content'>
-          <%= image_tag photo.url %>
-
+          <%= cl_image_tag(photo.url, :width => 420, :crop => :fit) %>
+          <div class="lightbox-caption">
             <p><%= photo.description %></p>
-
-            
-            <ul class="comments">
-              <% photo.comments.each do |comment| %>
-              <li><%= comment.content %>
-                Posted by: <%= comment.user.username %> 
-                <% if comment.user == current_user %>
-                  <%= link_to '', contest_comment_path(@contest, comment), 
-                      :class => 'icon-remove', :remote => true, :method => 'delete' %>
-                <% end %>
-              </li>
-              <% end %>
-            </ul>
-          
-            <%= form_for [photo, Comment.new], :remote => true do |f| %>
-              <%= f.label :content %>
-              <%= f.text_field :content, :placeholder => "Comment" %><br>
-              <%= f.submit "Submit", :class => "btn btn-primary" %>
-            <% end %>
-
+          </div>
         </div>
       </div>
-
       <a data-toggle="lightbox" href="#<%= dom_id(photo) %>"><%= image_tag(photo.url) %></a>  
 
       <li><%= photo.description %></li>
       <li>Submitted by: <%= photo.user.username %></li> 
+      <li><%= link_to photo.comments.count.to_s + ' comments', photo_path %></li>
+
+
+
     <% end %>
 
   </div>
