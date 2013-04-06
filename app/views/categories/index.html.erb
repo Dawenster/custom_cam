@@ -3,4 +3,8 @@
   <%= link_to category.title, category %>
 <% end %>
 
-<img src="<%= Photo.last.url %>">
+<ul>
+  <% Photo.all.reverse.each do |photo| %>
+    <li><%= image_tag photo.url %></li>
+  <% end %>
+</ul>
