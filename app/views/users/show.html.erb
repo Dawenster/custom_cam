@@ -23,9 +23,9 @@
   <h1>Your contests</h1>
   <h2>Welcome <%= current_user.username %></h2>
 
-  <div>
+  <div class="client_list_wrapper">
     <% current_user.contests.reverse.each do |contest| %>
-      <ul>
+      <ul class="client_contest_list">
         <li><h3 class="contest_title"><%= link_to contest.title, contest %></h3></li>
         <li>Created by: <%= contest.user.username %></li>
         <li>Category: <%= contest.category.title %></li>
