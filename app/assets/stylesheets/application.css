@@ -11,3 +11,18 @@
  *= require_self
  *= require_tree .
  */
+
+/* GStrap */
+
+body {
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+.container {
+  width: 62%;
+  margin: 0 auto;
+}
+
+input {
+  padding: 8px;
+}

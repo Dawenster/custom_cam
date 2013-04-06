@@ -7,8 +7,15 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<%= render "partials/nav_bar" %>
-<%= yield %>
+
+<div class="container">
+  <%= render "partials/nav_bar" %>
+  <% flash.each do |key, value| %>
+    <%= content_tag(:div, value, class: "alert alert-#{key}") %>
+  <% end %>
+
+  <%= yield %>
+</div>
 
 </body>
 </html>
