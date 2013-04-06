@@ -5,6 +5,7 @@ class ContestsController < ApplicationController
   def show
     @contest = Contest.find(params[:id])
     @photos = Photo.where('contest_id =?', params[:id])
+    @comments = @contest.comments
   end
 
   def new

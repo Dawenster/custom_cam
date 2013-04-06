@@ -10,3 +10,27 @@
   <li><%= photo.description %></li>
   <li>Submitted by: <%= photo.user.username %></li> 
 <% end %>
+
+<p>Totally cool comments:</p>
+
+<%= form_for [@contest, Comment.new], :remote => true do |f| %>
+  <div>
+    <%= f.label :content %>
+    <%= f.text_area :content, :placeholder => "Comment on this contest" %><br>
+    <%= f.submit "Submit Comment", :class => "btn btn-large btn-primary" %>
+  </div>
+<% end %>
+
+
+<ul class="comments">
+  <% @comments.each do |comment| %>
+    <li>
+      <%= comment.content %>
+      Posted by: <%= comment.user.username %> 
+      <% if comment.user == current_user %>
+      <%= link_to '', contest_comment_path(@contest, comment), 
+          :class => 'icon-remove', :remote => true, :method => 'delete' %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>

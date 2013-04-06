@@ -11,7 +11,7 @@ Welcome <%= current_user.username %>
 
 <div>
   <% current_user.contests.each do |contest| %>
-    <div><%= contest.title %></div>
+    <div><%= link_to contest.title, contest %></div>
     <div>Created by: <%= contest.user.username %></div>
     <div>Category: <%= contest.category.title %></div>
     <div>Price: $<%= contest.price %></div>
