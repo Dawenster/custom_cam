@@ -7,9 +7,14 @@ class User < ActiveRecord::Base
   has_many :comments
 
   attr_accessible :email, :password_digest, :photographer, :username, :password, :password_confirmation
+
   validates :email, presence: true
-  validates :username, presence: true
-  validates :password_digest, presence: true
+  validates :email, uniqueness: true
   validates :email, :format => { with: VALID_EMAIL_REGEX }
+
+  validates :username, presence: true
+  validates :username, uniqueness: true
+  
+  validates :password_digest, presence: true
   validates :password, :length => { minimum: 6 }
 end
