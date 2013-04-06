@@ -1,22 +1,23 @@
 Welcome <%= current_user.username %>
 
 <% if current_user.photographer %>
-<h1>Your photos</h1>
-<% current_user.photos.each do |photo| %>
-  <%= photo.description %>
-<% end %>
+  <h1>Your photos</h1>
+  <% current_user.photos.each do |photo| %>
+    <%= photo.description %>
 
-<% else %>
-<h1>Your contests</h1>
-
-<div>
-  <% current_user.contests.each do |contest| %>
-    <div><%= contest.title %></div>
-    <div>Created by: <%= contest.user.username %></div>
-    <div>Category: <%= contest.category.title %></div>
-    <div>Price: $<%= contest.price %></div>
-    <div>Description: <%= contest.description %></div>
-    <BR>
   <% end %>
-<% end %>
+
+  <% else %>
+  <h1>Your contests</h1>
+
+  <div>
+    <% current_user.contests.each do |contest| %>
+      <div><%= contest.title %></div>
+      <div>Created by: <%= contest.user.username %></div>
+      <div>Category: <%= contest.category.title %></div>
+      <div>Price: $<%= contest.price %></div>
+      <div>Description: <%= contest.description %></div>
+      <BR>
+    <% end %>
+  <% end %>
 </div>

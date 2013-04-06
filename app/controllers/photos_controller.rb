@@ -7,6 +7,7 @@ class PhotosController < ApplicationController
   def create
     p = Photo.new
     p.url = params[:file]
+    p.contest_id = params[:contest_id]
     p.user_id = current_user.id
     p.save!
 

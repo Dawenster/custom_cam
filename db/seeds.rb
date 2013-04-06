@@ -29,8 +29,4 @@ end
 end
 
 
-100.times do
-  Photo.create(:description => Faker::Lorem.sentence,
-               :contest_id => rand(1..50),
-               :user_id => rand(6..20))
-end
+
