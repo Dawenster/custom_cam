@@ -1,16 +1,6 @@
-Welcome <%= current_user.username %>
-
-<% if current_user.photographer %>
-<h1>Your photos</h1>
-<% current_user.photos.each do |photo| %>
-  <%= photo.description %>
-<% end %>
-
-<% else %>
-<h1>Your contests</h1>
-
 <div>
-  <% current_user.contests.each do |contest| %>
+  <h1>All contests</h1>
+  <% @contests.each do |contest| %>
     <div><%= contest.title %></div>
     <div>Created by: <%= contest.user.username %></div>
     <div>Category: <%= contest.category.title %></div>
@@ -18,5 +8,4 @@ Welcome <%= current_user.username %>
     <div>Description: <%= contest.description %></div>
     <BR>
   <% end %>
-<% end %>
 </div>

@@ -1,5 +1,5 @@
 CustomCam::Application.routes.draw do
-  root :to => "users#new"
+  root :to => "categories#index"
   resources :users
   resources :sessions, :only => [:new, :create, :destroy]
 

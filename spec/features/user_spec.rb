@@ -12,12 +12,12 @@ describe "user signup" do
   end
 end
 
-describe "profile page" do
+describe "profile page", :js => true do
   let(:client) { FactoryGirl.create(:user, :photographer => false) }
   let(:photographer) { FactoryGirl.create(:user, :photographer => true) }
 
-  let(:contest) { FactoryGirl.create(:contest, :creator_id => client.id) }
-  let(:photo) { FactoryGirl.create(:photo, :user_id => photographer.id) }
+  let!(:contest) { FactoryGirl.create(:contest, :creator_id => client.id) }
+  # let(:photo) { mock("photo", :description => "ABC") }
 
   context "is client"
   it "shows all contests" do
@@ -28,12 +28,12 @@ describe "profile page" do
     page.should have_content contest.title
   end
 
-  context "is photographer"
-  it "shows all photos" do
-    visit new_session_path
-    fill_in "user_email", with: photographer.email
-    fill_in "user_password", with: photographer.password
-    click_button "Sign in"
-    page.should have_content photo.description
-  end
+  # context "is photographer"
+  # it "shows all photos" do
+  #   visit new_session_path
+  #   fill_in "user_email", with: photographer.email
+  #   fill_in "user_password", with: photographer.password
+  #   click_button "Sign in"
+  #   page.should have_content photo.description
+  # end
 end

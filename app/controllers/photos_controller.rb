@@ -5,7 +5,13 @@ class PhotosController < ApplicationController
   end
 
   def create
-    # Upload a photo and save record to DB
+    p = Photo.new
+    p.url = params[:file]
+    p.user_id = current_user.id
+    p.save!
+
+    Cloudinary::Uploader.upload(params[:file][:filename], :public_id => 'mcchillinstaburger29323')
+
   end
 
   def edit

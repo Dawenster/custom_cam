@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
     else
       flash[:alert] = "Invalid email or password"
       @user = User.new
-      redirect new_session_path
+      redirect_to new_session_path
     end
   end
 

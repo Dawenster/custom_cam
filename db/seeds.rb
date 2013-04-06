@@ -6,7 +6,7 @@ categories.each do |category|
   Category.create(:title => category)
 end
 
-5.times do
+5.times do 
   User.create(:username => Faker::Name.name,
               :email => Faker::Internet.email,
               :password => "Whatever",

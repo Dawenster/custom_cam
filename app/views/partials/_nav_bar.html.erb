@@ -1,5 +1,5 @@
 <% if current_user %>
-  <%= link_to "Logout", session_path, :method => :delete %>
+  <%= link_to "Logout", session_path(session[:id]), :method => :delete %>
 <% else %>
   <%= link_to "Login", new_session_path %>
   <%= link_to "Sign up", new_user_path %>
