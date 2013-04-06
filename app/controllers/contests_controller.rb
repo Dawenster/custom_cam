@@ -8,6 +8,11 @@ class ContestsController < ApplicationController
   end
 
   def new
+    unless current_user
+      flash[:alert] = "You must be logged in to create a contest."
+      redirect_to new_session_path
+    end
+
     @contest = Contest.new
     @categories = Category.all
   end
