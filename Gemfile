@@ -26,11 +26,11 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'better_errors'
   gem 'debugger'
+  gem 'factory_girl_rails'
+  gem 'faker'
 end
 
 group :test do
-  gem 'faker'
-  gem 'factory_girl_rails'
   gem 'shoulda-matchers'
   gem 'capybara'
   gem 'database_cleaner'

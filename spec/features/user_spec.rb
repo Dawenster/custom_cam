@@ -25,7 +25,7 @@ describe "profile page" do
     fill_in "user_email", with: client.email
     fill_in "user_password", with: client.password
     click_button "Sign in"
-    page.should have_content "Your contests"
+    page.should have_content contest.title
   end
 
   context "is photographer"
@@ -34,6 +34,6 @@ describe "profile page" do
     fill_in "user_email", with: photographer.email
     fill_in "user_password", with: photographer.password
     click_button "Sign in"
-    page.should have_content "Your photos"
+    page.should have_content photo.description
   end
 end
