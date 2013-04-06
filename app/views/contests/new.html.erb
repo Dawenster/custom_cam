@@ -10,11 +10,18 @@
   <%= f.text_area :description, :placeholder => "Enter your contest details here" %>
   <%= f.label :price %>
   <%= f.text_field :price %>
-  <!-- Need field for duration -->
+  <%= f.label :duration %>
+  <%= radio_button_tag(:duration, 3) %>
+  <%= label_tag(:duration, "3 days") %>
+  <%= radio_button_tag(:duration, 5) %>
+  <%= label_tag(:duration, "5 days") %>
+  <%= radio_button_tag(:duration, 7) %>
+  <%= label_tag(:duration, "7 days") %>
   <br>
   <%= f.submit "Submit!" %>
 </div>
 <% end %>
 
 <%= link_to "Back to Index", root_path %>
-<p>(Need field for duration)</p>
+<p>(Adding field for duration)</p>
+
