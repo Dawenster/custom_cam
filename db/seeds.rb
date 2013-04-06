@@ -25,5 +25,6 @@ end
                  :description => Faker::Lorem.paragraph,
                  :category_id => rand(1..12),
                  :price => rand(50..500),
-                 :creator_id => rand(1..5))
+                 :creator_id => rand(1..5),
+                 :duration => [3,5,7].sample)
 end

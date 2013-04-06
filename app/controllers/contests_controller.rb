@@ -4,6 +4,7 @@ class ContestsController < ApplicationController
 
   def show
     @contest = Contest.find(params[:id])
+    @time_left = @contest.created_at + (@contest.duration * 86400) - Time.now
     @photos = Photo.where('contest_id =?', params[:id])
     @comments = @contest.comments
   end
@@ -19,11 +20,13 @@ class ContestsController < ApplicationController
   end
 
   def create
+    puts params.inspect
     @contest = Contest.new(:title => params[:contest][:title],
                            :description => params[:contest][:description],
                            :price => params[:contest][:price].to_i,
                            :category_id => params[:contest][:category],
-                           :creator_id => current_user.id)
+                           :creator_id => current_user.id,  
+                           :duration => params[:duration])
 
     if @contest.save
       redirect_to contest_path(@contest)
