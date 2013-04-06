@@ -6,7 +6,7 @@
 <p>Time left: CONTEST DURATION</p>
 <p>Submissions:</p>
 <% @photos.each do |photo| %>
-  <li><%= link_to 'PHOTO WOULD BE HERE', photo %></li>
+  <li><%= image_tag photo.url, photo %></li>
   <li><%= photo.description %></li>
   <li>Submitted by: <%= photo.user.username %></li> 
 <% end %>

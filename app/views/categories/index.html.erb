@@ -2,3 +2,5 @@
 <% @categories.each do |category| %>
   <%= link_to category.title, category %>
 <% end %>
+
+<img src="<%= Photo.last.url %>">
