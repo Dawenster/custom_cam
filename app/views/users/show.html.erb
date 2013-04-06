@@ -5,7 +5,14 @@ Welcome <%= current_user.username %>
   <% current_user.photos.reverse.each do |photo| %>
     <ul>
       <li><h3><%= link_to "Contest: " + photo.contest.title, photo.contest %></h3></li>
-      <li><%= link_to cl_image_tag(photo.url, :width => 300, :height => 300, :crop => :thumb, :gravity => :face), photo.url.to_s %></li>
+      <li><%= cl_image_tag(photo.url,:transformation => {
+                   :width => 400, :height => 300, 
+                   :gravity => :face, :crop => :thumb
+                 }, 
+                 :overlay => "imr8jo8uwavt6r4gbzlu", 
+                 :width => 300, :crop => :scale, 
+                 :gravity => :south_east, :x => 5, :y => 5, 
+                 :html_width => 400, :html_height => 300) %></li>
       <% unless photo.description = "" %>
         <li><%= photo.description %></li>
       <% end %>
