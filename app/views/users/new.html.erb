@@ -1,13 +1,22 @@
-<h1>Sign Up</h1>
+<div id="login_container">
+  <div id="login_box">
+    <h1>Sign Up</h1>
 
-<%= form_for @user do |f| %>
-  <%= f.text_field :username, placeholder: "Username" %>
-  <%= f.text_field :email, placeholder: "Email" %>
-  <%= f.text_field :password, placeholder: "Password" %>
-  <%= f.text_field :password_confirmation, placeholder: "Password Again" %>
-  <%= radio_button_tag(:photographer, "Client") %>
-  <%= label_tag(:photographer, "I am a client") %>
-  <%= radio_button_tag(:photographer, "Photographer") %>
-  <%= label_tag(:photographer, "I am a photographer") %>
-  <%= f.submit "Create account" %>
-<% end %>
+    <%= form_for @user do |f| %>
+      <%= f.text_field :username, placeholder: "Username" %>
+      <%= f.text_field :email, placeholder: "Email" %>
+      <%= f.text_field :password, placeholder: "Password" %>
+      <%= f.text_field :password_confirmation, placeholder: "Password Again" %>
+      
+      <div class="radio_buttons">
+        <%= radio_button_tag(:photographer, "Client") %>
+        <%= label_tag(:photographer, "I am a client") %>
+
+        <%= radio_button_tag(:photographer, "Photographer") %>
+        <%= label_tag(:photographer, "I am a photographer") %>
+      </div>
+
+      <%= f.submit "Create account" %>
+    <% end %>
+  </div>
+</div>

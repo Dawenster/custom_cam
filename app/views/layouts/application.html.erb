@@ -18,7 +18,9 @@
     <%= content_tag(:div, value, class: "alert alert-#{key}") %>
   <% end %>
 
-  <%= yield %>
+  <div class="content">
+    <%= yield %>
+  </div>
   <%= render "partials/footer" %>
 </div>
 
