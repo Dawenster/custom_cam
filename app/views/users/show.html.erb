@@ -29,7 +29,7 @@
         <li><h3 class="contest_title"><%= link_to contest.title, contest %></h3></li>
         <li>Created by: <%= contest.user.username %></li>
         <li class="category">Category: <%= contest.category.title %></li>
-        <li><span class="price">Price: $<%= contest.price %></span></li>
+        <li><span class="bounty">Bounty: $<%= contest.price %></span></li>
         <li><strong>Description:</strong> <%= contest.description %></li>
       </ul>
     <% end %>
