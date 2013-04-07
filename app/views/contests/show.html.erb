@@ -1,4 +1,25 @@
-<div class="row">
+<div id='timeleft' style='visibility:hidden'><%= humanize(@time_left).gsub(/days/, ':').gsub(/hours/, ':').gsub(/minutes/, ':').gsub(/seconds/, ':') %></div> 
+
+<script type='text/javascript'>
+  var timeLeft = $('#timeleft').text();
+  $(function(){
+    $('#counter').countdown({
+    image: 'digits.png',
+    startTime: timeLeft,
+    timerEnd: function() { alert('This contest has already ended'); },
+      });
+  });
+</script>
+ <div id="counter-block">
+   <div id="counter"></div>
+     <div class="desc">
+       <div>Days</div>
+       <div>Hours</div>
+       <div>Minutes</div>
+       <div>Seconds</div>
+    </div>
+  </div>
+<div class="row"> 
   <div class="span5">
     <h1><%= @contest.title %></h1>
     <p><strong>Created By:</strong> <%= User.find(@contest.creator_id).username %></p>
