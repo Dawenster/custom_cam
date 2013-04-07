@@ -10,8 +10,11 @@
       <nav>
         <ul class="nav pull-right">
           <% if current_user %>
-            <li><%= link_to "Add Contest", new_contest_path %></li>
-            <li><%= link_to "Find a Contest", categories_path %></li>
+            <% if !current_user.photographer %>
+              <li><%= link_to "Add Contest", new_contest_path %></li>
+            <% else current_user.photographer %>
+              <li><%= link_to "Find a Contest", categories_path %></li>
+            <% end %>
             <li><%= link_to "Profile: " + current_user.username, user_path(current_user) %></li>
             <li><%= link_to "Logout", session_path(session[:id]), :method => :delete %></li>
           <% else %>
@@ -23,6 +26,3 @@
     </div>
   </div>
 </header>
-
-
-
