@@ -1,3 +1,8 @@
+body
+  margin: 0
+  padding: 0
+  height: 100%
+
 .category_list
   margin-bottom: 32px
   li
@@ -37,6 +42,10 @@
   border-top: 1px solid #eee
   margin: 32px 0
   padding-top: 16px
+  bottom: 0
+  left: 0
+  position: absolute
+  height: 50px
   p
     text-align: center
     color: #ccc
@@ -44,3 +53,27 @@
     opacity: 0.5
   a:hover
     opacity: 1
+
+.container
+  min-height: 100%
+  position: relative
+
+.content
+  margin-top: 124px
+  padding-bottom: 150px
+
+#login_box
+  width: 300px
+  border-radius: 8px
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.5)
+  padding: 16px
+  margin: auto
+  text-align: center
+  overflow: auto
+  h1
+    text-align: left
+  input
+    width: 284px
+  input[type=submit]
+    width: 100px
+    float: right
