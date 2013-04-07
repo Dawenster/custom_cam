@@ -1,4 +1,6 @@
-<div id='timeleft' style='visibility:hidden'><%= humanize(@time_left).gsub(/days/, ':').gsub(/hours/, ':').gsub(/minutes/, ':').gsub(/seconds/, ':') %></div> 
+<div id='timeleft' style='visibility:hidden'>
+  <%= humanize(@time_left).gsub(/days/, ':').gsub(/hours/, ':').gsub(/minutes/, ':').gsub(/seconds/, ':') %>
+</div> 
 
 <script type='text/javascript'>
   var timeLeft = $('#timeleft').text();
@@ -10,6 +12,7 @@
       });
   });
 </script>
+
  <div id="counter-block">
    <div id="counter"></div>
      <div class="desc">
@@ -104,30 +107,14 @@
         </div> 
         <li class="<%= dom_id(@winning_photo) %>">
           <%= link_to @winning_photo.comments.count.to_s + ' comments', @winning_photo %> 
-          | Current rating: 
-          <span>
-            <% case average_rating %>
-            <% when 1 %>
-              <%= image_tag 'gold_star.gif' %>
-            <% when 2 %>
-              <%= image_tag 'gold_star.gif' %><%= image_tag 'gold_star.gif' %>
-            <% when 3 %>
-              <%= image_tag 'gold_star.gif' %><%= image_tag 'gold_star.gif' %><%= image_tag 'gold_star.gif' %>
-            <% when 4 %>
-              <%= image_tag 'gold_star.gif' %><%= image_tag 'gold_star.gif' %><%= image_tag 'gold_star.gif' %><%= image_tag 'gold_star.gif' %>
-            <% when 5 %>
-              <%= image_tag 'gold_star.gif' %><%= image_tag 'gold_star.gif' %><%= image_tag 'gold_star.gif' %><%= image_tag 'gold_star.gif' %><%= image_tag 'gold_star.gif' %>
-            <% else %>
-              <%= average_rating %>
-            <% end %>
-          </span>
+          | Current rating: <%= render "ratings", :average_rating => average_rating %>
         </li>
         <% rating = user_photo_rating(@winning_photo).last.value if user_photo_rating(@winning_photo).last %>
 
         <% if rating %>
           <li>You rated this photo <%= rating %> stars</li>
         <% else %>
-          <li>Rate this photo:
+          <li class="<%= dom_id(@winning_photo) %>-rate">Rate this photo:
             <input name="<%= dom_id(@winning_photo) %>" type="radio" data-value="1" class="star click-star" id="1,<%= @winning_photo.id %>"/>
             <input name="<%= dom_id(@winning_photo) %>" type="radio" data-value="2" class="star click-star" id="2,<%= @winning_photo.id %>"/>
             <input name="<%= dom_id(@winning_photo) %>" type="radio" data-value="3" class="star click-star" id="3,<%= @winning_photo.id %>"/>
@@ -181,35 +168,18 @@
           <% end %>
 
           <li class="<%= dom_id(photo) %>"><%= link_to photo.comments.count.to_s + ' comments', photo %> 
-           | Current rating: 
-          <span>
-            <% case average_rating %>
-            <% when 1 %>
-              <%= image_tag 'gold_star.gif' %>
-            <% when 2 %>
-              <%= image_tag 'gold_star.gif' %><%= image_tag 'gold_star.gif' %>
-            <% when 3 %>
-              <%= image_tag 'gold_star.gif' %><%= image_tag 'gold_star.gif' %><%= image_tag 'gold_star.gif' %>
-            <% when 4 %>
-              <%= image_tag 'gold_star.gif' %><%= image_tag 'gold_star.gif' %><%= image_tag 'gold_star.gif' %><%= image_tag 'gold_star.gif' %>
-            <% when 5 %>
-              <%= image_tag 'gold_star.gif' %><%= image_tag 'gold_star.gif' %><%= image_tag 'gold_star.gif' %><%= image_tag 'gold_star.gif' %><%= image_tag 'gold_star.gif' %>
-            <% else %>
-              <%= average_rating %>
-            <% end %>
-          </span></li>
+           | Current rating: <%= render "ratings", :average_rating => average_rating %>
+        </li>
           <% rating = user_photo_rating(photo).last.value if user_photo_rating(photo).last %>
           <% if rating %>
             <li>You rated this photo <%= rating %> stars</li>
           <% else %>
             <li class="<%= dom_id(photo) %>-rate">Rate this photo:
-              <div>
-                <input name="<%= dom_id(photo) %>" type="radio" data-value="1" class="star click-star" id="1,<%= photo.id %>"/>
-                <input name="<%= dom_id(photo) %>" type="radio" data-value="2" class="star click-star" id="2,<%= photo.id %>"/>
-                <input name="<%= dom_id(photo) %>" type="radio" data-value="3" class="star click-star" id="3,<%= photo.id %>"/>
-                <input name="<%= dom_id(photo) %>" type="radio" data-value="4" class="star click-star" id="4,<%= photo.id %>"/>
-                <input name="<%= dom_id(photo) %>" type="radio" data-value="5" class="star click-star" id="5,<%= photo.id %>"/>
-              </div>
+              <input name="<%= dom_id(photo) %>" type="radio" data-value="1" class="star click-star" id="1,<%= photo.id %>"/>
+              <input name="<%= dom_id(photo) %>" type="radio" data-value="2" class="star click-star" id="2,<%= photo.id %>"/>
+              <input name="<%= dom_id(photo) %>" type="radio" data-value="3" class="star click-star" id="3,<%= photo.id %>"/>
+              <input name="<%= dom_id(photo) %>" type="radio" data-value="4" class="star click-star" id="4,<%= photo.id %>"/>
+              <input name="<%= dom_id(photo) %>" type="radio" data-value="5" class="star click-star" id="5,<%= photo.id %>"/>
             </li>
           <% end %>
         </div>

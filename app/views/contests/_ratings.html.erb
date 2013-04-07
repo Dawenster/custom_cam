@@ -1,0 +1,16 @@
+<span>
+  <% case average_rating %>
+  <% when 1 %>
+    <%= image_tag 'gold_star.gif' %>
+  <% when 2 %>
+    <%= image_tag 'gold_star.gif' %><%= image_tag 'gold_star.gif' %>
+  <% when 3 %>
+    <%= image_tag 'gold_star.gif' %><%= image_tag 'gold_star.gif' %><%= image_tag 'gold_star.gif' %>
+  <% when 4 %>
+    <%= image_tag 'gold_star.gif' %><%= image_tag 'gold_star.gif' %><%= image_tag 'gold_star.gif' %><%= image_tag 'gold_star.gif' %>
+  <% when 5 %>
+    <%= image_tag 'gold_star.gif' %><%= image_tag 'gold_star.gif' %><%= image_tag 'gold_star.gif' %><%= image_tag 'gold_star.gif' %><%= image_tag 'gold_star.gif' %>
+  <% else %>
+    <%= average_rating %>
+  <% end %>
+</span>
