@@ -1,12 +1,11 @@
 <div class="row">
   <div class="span5">
     <h1><%= @contest.title %></h1>
-    <p><strong><%= @time_left > 0 ? ("Days Left :" + humanize(@time_left) ) : "CONTEST OVER" %></strong></p>
     <p><strong>Created By:</strong> <%= User.find(@contest.creator_id).username %></p>
     <p><strong>Category:</strong> <%= @contest.category.title %></p>
     <p><strong>Description:</strong> <%= @contest.description %></p>
     <p><strong>Bounty:</strong> $<%= @contest.price %></p>
-    <p><strong>Time left:</strong> TODO: CONTEST DURATION</p>
+    <p><strong>Time left:</strong> <%= @time_left > 0 ? ("Days Left :" + humanize(@time_left) ) : "CONTEST OVER" %></p>
 
     <% if @time_left > 0 && current_user.photographer %>
       <%= form_tag photos_path, :method => 'post', :multipart => true do %>
@@ -15,7 +14,7 @@
         <%= hidden_field_tag :contest_id, params[:id] %>
         <div id="input_desc">
           <%= label_tag(:description, "Photo Description:") %>
-          <%= text_area_tag(:description) %>
+          <%= text_area_tag(:description) %><BR>
           <%= submit_tag "Submit!", :class => "btn btn-primary" %>
         </div>
       <% end %>
@@ -33,15 +32,14 @@
               <%= link_to '', contest_comment_path(@contest, comment), 
                   :class => 'icon-remove', :remote => true, :method => 'delete' %>
             <% end %>
-           </div>
+          </div>
         </li>
       <% end %>
     </ul>
 
     <%= form_for [@contest, Comment.new], :remote => true do |f| %>
       <div>
-        <%= f.label :content %>
-        <%= f.text_area :content, :placeholder => "Comment on this contest" %><br>
+        <%= f.text_area :content, :size => "50x10", :placeholder => "Comment on this contest" %><br>
         <%= f.submit "Submit Comment", :class => "btn btn-large btn-primary" %>
       </div>
     <% end %>
@@ -86,13 +84,48 @@
             <% if @winning_photo == nil && @time_left < 0 && current_user == @contest.user %><button type="button" class="btn btn-large btn-success winner-button hide" data-photo="<%= photo.id %>" data-contest="<%= @contest.id %>">Select as winner</button><% end %>
             <a data-toggle="lightbox" href="#<%= dom_id(photo) %>">
               <%= cl_image_tag photo.url, :width => 500, :height => 400, :gravity => :face, :crop => :thumb %>
-            </a>  
+            </a>
+
           </div>
           <li><%= photo.description %></li>
           <div class="posted_by">
             Submitted by: <%= photo.user.username %>
-          </div> 
-          <li><%= link_to photo.comments.count.to_s + ' comments', photo %></li>
+          </div>
+
+          <% if photo.ratings != [] %>
+            <% ratings = photo.ratings.map { |rating| rating.value } %>
+            <% average_rating = (ratings.inject{ |sum, el| sum + el }.to_f / ratings.size).round %>
+          <% else %>
+            <% average_rating = "No ratings yet" %>
+          <% end %>
+
+          <li class="<%= dom_id(photo) %>"><%= link_to photo.comments.count.to_s + ' comments', photo %> 
+           | Current rating: 
+          <span>
+            <% case average_rating %>
+            <% when 1 %>
+              <%= image_tag 'gold_star.gif' %>
+            <% when 2 %>
+              <%= image_tag 'gold_star.gif' %><%= image_tag 'gold_star.gif' %>
+            <% when 3 %>
+              <%= image_tag 'gold_star.gif' %><%= image_tag 'gold_star.gif' %><%= image_tag 'gold_star.gif' %>
+            <% when 4 %>
+              <%= image_tag 'gold_star.gif' %><%= image_tag 'gold_star.gif' %><%= image_tag 'gold_star.gif' %><%= image_tag 'gold_star.gif' %>
+            <% when 5 %>
+              <%= image_tag 'gold_star.gif' %><%= image_tag 'gold_star.gif' %><%= image_tag 'gold_star.gif' %><%= image_tag 'gold_star.gif' %><%= image_tag 'gold_star.gif' %>
+            <% else %>
+              <%= average_rating %>
+            <% end %>
+          </span></li>
+          <li>Rate this photo:
+            <div>
+              <input name="<%= dom_id(photo) %>" type="radio" data-value="1" class="star click-star" id="1,<%= photo.id %>"/>
+              <input name="<%= dom_id(photo) %>" type="radio" data-value="2" class="star click-star" id="2,<%= photo.id %>"/>
+              <input name="<%= dom_id(photo) %>" type="radio" data-value="3" class="star click-star" id="3,<%= photo.id %>"/>
+              <input name="<%= dom_id(photo) %>" type="radio" data-value="4" class="star click-star" id="4,<%= photo.id %>"/>
+              <input name="<%= dom_id(photo) %>" type="radio" data-value="5" class="star click-star" id="5,<%= photo.id %>"/>
+            </div>
+          </li>
         </div>
       <% end %>
     <% end %>

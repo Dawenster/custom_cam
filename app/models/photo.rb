@@ -3,6 +3,7 @@ class Photo < ActiveRecord::Base
   belongs_to :user
   belongs_to :contest
   has_many :comments, :as => :commentable
+  has_many :ratings
 
   validates :user_id, :presence => true
   validates :url, :presence => true

@@ -11,6 +11,8 @@ CustomCam::Application.routes.draw do
     resources :comments
   end
 
+  resources :ratings, :only => [:create, :update, :destroy]
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
