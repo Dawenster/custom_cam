@@ -6,22 +6,22 @@
     <p><strong>Description:</strong> <%= @contest.description %></p>
     <p><strong>Bounty:</strong> $<%= @contest.price %></p>
     <p><strong>Time left:</strong> <%= @time_left > 0 ? ("Days Left :" + humanize(@time_left) ) : "CONTEST OVER" %></p>
-
-    <% if @time_left > 0 && current_user.photographer %>
-      <%= form_tag photos_path, :method => 'post', :multipart => true do %>
-        <label for="file"><h3>Submit a Photo</h3></label>
-        <%= file_field_tag "file" %>
-        <%= hidden_field_tag :contest_id, params[:id] %>
-        <div id="input_desc">
-          <%= label_tag(:description, "Photo Description:") %>
-          <%= text_area_tag(:description) %><BR>
-          <%= submit_tag "Submit!", :class => "btn btn-primary" %>
-        </div>
+    <% if current_user %>
+      <% if @time_left > 0 && current_user.photographer %>
+        <%= form_tag photos_path, :method => 'post', :multipart => true do %>
+          <label for="file"><h3>Submit a Photo</h3></label>
+          <%= file_field_tag "file" %>
+          <%= hidden_field_tag :contest_id, params[:id] %>
+          <div id="input_desc">
+            <%= label_tag(:description, "Photo Description:") %>
+            <%= text_area_tag(:description) %><BR>
+            <%= submit_tag "Submit!", :class => "btn btn-primary" %>
+          </div>
+        <% end %>
       <% end %>
     <% end %>
 
     <h3>Contest Comments (<%= @comments.count %>):</h3>
-
     <ul class="comments">
       <% @comments.each do |comment| %>
         <li>
@@ -43,7 +43,7 @@
         <%= f.submit "Submit Comment", :class => "btn btn-large btn-primary" %>
       </div>
     <% end %>
-  </div>
+    </div>
 
   <div class="span7">
     <% if @winning_photo %>

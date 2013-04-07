@@ -17,7 +17,14 @@ class UsersController < ApplicationController
       session[:id] = @user.id
       UserMailer.welcome_email(@user).deliver
       redirect_to user_path(@user)
-    else
+    elsif params[:user][:password] != params[:user][:password_confirmation] && User.find_by_email(params[:user][:email])
+      flash[:alert] = "Email already exists and password does not match fool"
+      redirect_to new_user_path
+    elsif params[:user][:password] != params[:user][:password_confirmation]
+      flash[:alert] = "Password does not match"
+      redirect_to new_user_path
+    elsif User.find_by_email(params[:user][:email])
+      flash[:alert] = "That email already exists"
       redirect_to new_user_path
     end
   end
