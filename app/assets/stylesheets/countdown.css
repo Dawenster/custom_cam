@@ -1,0 +1,33 @@
+/*br { 
+  clear: both; 
+}
+*/
+.cntSeparator {
+  visibility: hidden;
+  margin-right:45px;
+  color: #000;
+}
+
+div#counter-block {
+  width: 100%;
+  margin: auto;
+  text-align: center;
+}
+
+div#counter :last-child{
+  display: none;
+}
+
+.desc { 
+  margin: 7px 2px 0px; 
+}
+
+.desc div {
+  float: left;
+  font-family: Arial;
+  width: 70px;
+  margin-right: 65px;
+  font-size: 13px;
+  font-weight: bold;
+  color: #000;
+}
