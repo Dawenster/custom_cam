@@ -34,6 +34,10 @@ class ContestsController < ApplicationController
                            :duration => params[:duration])
 
     if @contest.save
+      time = @contest.duration * 100
+      scheduler.in( (Time.now + time).to_s + "s") do
+        UserMailer.creator_reminder(@contest.user, @contest.id)
+      end
       redirect_to contest_path(@contest)
     else
       flash.now[:alert] = @contest.errors.full_messages.join(",")
