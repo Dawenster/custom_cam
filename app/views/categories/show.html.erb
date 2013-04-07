@@ -1,7 +1,7 @@
 <h1>Category: <%= @category.title %></h1>
 
 <div class="category_list_wrapper">
-  <% @category.contests.each do |contest| %>
+  <% @category.contests.reverse.each do |contest| %>
     <ul>
       <li><h3><%= link_to contest.title, contest %></h3></li>
       <li><span class="bounty">Bounty: $<%= contest.price %></span></li>
