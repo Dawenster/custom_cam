@@ -10,7 +10,13 @@ class UserMailer < ActionMailer::Base
   def creator_reminder(user, contest_id)
     @creator = user
     @contest = Contest.find(contest_id)
-    @contest_url = contest_path_url(@contest)
+    @contest_url = contest_path(@contest)
     mail(:to => @creator.email, :subject => "Time to pick your photo!")
+  end
+
+  def winner_email(winner, contest)
+    @user = winner
+    @url = contest_path(contest)
+    mail(:to => @user.email, :subject => "I'm on a boat!!!")
   end
 end
