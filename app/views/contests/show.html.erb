@@ -48,6 +48,13 @@
   <div class="span7">
     <% if @winning_photo %>
       <h1>Winner!</h1>
+
+      <% if @winning_photo.ratings != [] %>
+        <% ratings = @winning_photo.ratings.map { |rating| rating.value } %>
+        <% average_rating = (ratings.inject{ |sum, el| sum + el }.to_f / ratings.size).round %>
+      <% else %>
+        <% average_rating = "No ratings yet" %>
+      <% end %>
       
       <div class="each-photo-submission">
         <div class="photo-and-button">
@@ -59,7 +66,38 @@
         <div class="posted_by">
           Submitted by: <%= @winning_photo.user.username %>
         </div> 
-        <li><%= link_to @winning_photo.comments.count.to_s + ' comments', @winning_photo %></li>
+        <li class="<%= dom_id(@winning_photo) %>"><%= link_to @winning_photo.comments.count.to_s + ' comments', @winning_photo %>
+         | Current rating: 
+          <span>
+            <% case average_rating %>
+            <% when 1 %>
+              <%= image_tag 'gold_star.gif' %>
+            <% when 2 %>
+              <%= image_tag 'gold_star.gif' %><%= image_tag 'gold_star.gif' %>
+            <% when 3 %>
+              <%= image_tag 'gold_star.gif' %><%= image_tag 'gold_star.gif' %><%= image_tag 'gold_star.gif' %>
+            <% when 4 %>
+              <%= image_tag 'gold_star.gif' %><%= image_tag 'gold_star.gif' %><%= image_tag 'gold_star.gif' %><%= image_tag 'gold_star.gif' %>
+            <% when 5 %>
+              <%= image_tag 'gold_star.gif' %><%= image_tag 'gold_star.gif' %><%= image_tag 'gold_star.gif' %><%= image_tag 'gold_star.gif' %><%= image_tag 'gold_star.gif' %>
+            <% else %>
+              <%= average_rating %>
+            <% end %>
+          </span></li>
+          <% rating = user_photo_rating(@winning_photo).last.value if user_photo_rating(@winning_photo).last %>
+          <% if rating %>
+            <li>You rated this photo <%= rating %> stars</li>
+          <% else %>
+            <li>Rate this photo:
+              <div>
+                <input name="<%= dom_id(@winning_photo) %>" type="radio" data-value="1" class="star click-star" id="1,<%= @winning_photo.id %>"/>
+                <input name="<%= dom_id(@winning_photo) %>" type="radio" data-value="2" class="star click-star" id="2,<%= @winning_photo.id %>"/>
+                <input name="<%= dom_id(@winning_photo) %>" type="radio" data-value="3" class="star click-star" id="3,<%= @winning_photo.id %>"/>
+                <input name="<%= dom_id(@winning_photo) %>" type="radio" data-value="4" class="star click-star" id="4,<%= @winning_photo.id %>"/>
+                <input name="<%= dom_id(@winning_photo) %>" type="radio" data-value="5" class="star click-star" id="5,<%= @winning_photo.id %>"/>
+              </div>
+            </li>
+          <% end %>
       </div>
     <% end %>
 
@@ -117,15 +155,20 @@
               <%= average_rating %>
             <% end %>
           </span></li>
-          <li>Rate this photo:
-            <div>
-              <input name="<%= dom_id(photo) %>" type="radio" data-value="1" class="star click-star" id="1,<%= photo.id %>"/>
-              <input name="<%= dom_id(photo) %>" type="radio" data-value="2" class="star click-star" id="2,<%= photo.id %>"/>
-              <input name="<%= dom_id(photo) %>" type="radio" data-value="3" class="star click-star" id="3,<%= photo.id %>"/>
-              <input name="<%= dom_id(photo) %>" type="radio" data-value="4" class="star click-star" id="4,<%= photo.id %>"/>
-              <input name="<%= dom_id(photo) %>" type="radio" data-value="5" class="star click-star" id="5,<%= photo.id %>"/>
-            </div>
-          </li>
+          <% rating = user_photo_rating(photo).last.value if user_photo_rating(photo).last %>
+          <% if rating %>
+            <li>You rated this photo <%= rating %> stars</li>
+          <% else %>
+            <li class="<%= dom_id(photo) %>-rate">Rate this photo:
+              <div>
+                <input name="<%= dom_id(photo) %>" type="radio" data-value="1" class="star click-star" id="1,<%= photo.id %>"/>
+                <input name="<%= dom_id(photo) %>" type="radio" data-value="2" class="star click-star" id="2,<%= photo.id %>"/>
+                <input name="<%= dom_id(photo) %>" type="radio" data-value="3" class="star click-star" id="3,<%= photo.id %>"/>
+                <input name="<%= dom_id(photo) %>" type="radio" data-value="4" class="star click-star" id="4,<%= photo.id %>"/>
+                <input name="<%= dom_id(photo) %>" type="radio" data-value="5" class="star click-star" id="5,<%= photo.id %>"/>
+              </div>
+            </li>
+          <% end %>
         </div>
       <% end %>
     <% end %>

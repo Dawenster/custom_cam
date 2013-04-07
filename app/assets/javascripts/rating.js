@@ -9,6 +9,7 @@ $(document).ready(function($) {
     .done(function(data) {
       var stars = starCount(data.avg);
       $('.photo_' + data.id + ' span').html(stars);
+      $('li.photo_' + data.id + '-rate').html("Thank you for rating!");
       console.log(data.unround)
     })
     .fail(function(data) {

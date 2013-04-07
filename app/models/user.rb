@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   has_many :contests, :foreign_key => :creator_id
   has_many :photos
   has_many :comments
+  has_many :ratings
 
   attr_accessible :email, :password_digest, :photographer, :username, :password, :password_confirmation
 
