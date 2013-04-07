@@ -35,9 +35,9 @@ class ContestsController < ApplicationController
 
     if @contest.save
       time = @contest.duration * 100
-      scheduler.in( (Time.now + time).to_s + "s") do
-        UserMailer.creator_reminder(@contest.user, @contest.id)
-      end
+      # scheduler.in( (Time.now + time).to_s + "s") do
+      #   UserMailer.creator_reminder(@contest.user, @contest.id)
+      # end
       redirect_to contest_path(@contest)
     else
       flash.now[:alert] = @contest.errors.full_messages.join(",")
@@ -50,7 +50,7 @@ class ContestsController < ApplicationController
     photo = Photo.find(params[:photo])
     contest = photo.contest
     contest.update_attributes(:winning_photo_id => photo.id)
-    photo.user
+    UserMailer.(photo.user
     render :json => { :contest => contest }
   end
 end
