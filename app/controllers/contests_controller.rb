@@ -50,6 +50,7 @@ class ContestsController < ApplicationController
     photo = Photo.find(params[:photo])
     contest = photo.contest
     contest.update_attributes(:winning_photo_id => photo.id)
+    photo.user
     render :json => { :contest => contest }
   end
 end
