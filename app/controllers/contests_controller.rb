@@ -16,6 +16,10 @@ class ContestsController < ApplicationController
       redirect_to new_session_path
     end
 
+    if current_user.photographer
+      redirect_to root_path
+    end
+
     @contest = Contest.new
     @categories = Category.all
   end

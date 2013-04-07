@@ -1,7 +1,12 @@
 class PhotosController < ApplicationController
 
   def new
+    if !current_user.photographer
+      redirect_to root_path
+    end
+    
     @photo = Photo.new
+
   end
 
   def create
