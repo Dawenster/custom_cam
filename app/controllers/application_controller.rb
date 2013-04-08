@@ -17,5 +17,31 @@ class ApplicationController < ActionController::Base
     }.join(' ')
   end
 
-  helper_method :humanize
+  def countdown_num(num)
+    matches = num.match ( /(\d{0,2}):(\d{0,2}):(\d{0,2}):(\d{0,2})/ )
+    correct_num = ""
+    puts matches
+    i = 1
+    first = true
+    ((matches.length) -1 ).times do
+      if matches[i].length == 1 && first == false
+        correct_num << (":0" + matches[i] )
+        i += 1
+      elsif matches[i].length == 1 && first == true
+        correct_num << ("0" + matches[i])
+        first = false
+        i += 1
+      elsif matches[i].length == 2 && first == true
+        correct_num << matches[i]
+        first = false
+        i += 1
+      else
+        correct_num << (":" + matches[i] )
+        i += 1
+      end
+    end
+    correct_num  
+  end
+
+  helper_method :humanize, :countdown_num
 end

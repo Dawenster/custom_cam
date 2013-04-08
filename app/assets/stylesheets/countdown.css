@@ -14,10 +14,6 @@ div#counter-block {
   text-align: center;
 }
 
-div#counter :last-child{
-  display: none;
-}
-
 .desc { 
   margin: 7px 2px 0px; 
 }

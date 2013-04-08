@@ -1,6 +1,5 @@
-<div id='timeleft' style='visibility:hidden'>
-  <%= humanize(@time_left).gsub(/days/, ':').gsub(/hours/, ':').gsub(/minutes/, ':').gsub(/seconds/, ':') %>
-</div> 
+<div id='timeleft' style='visibility:hidden'><%= @time_for_countdown if @time_left > 0 %></div> 
+
 
 <script type='text/javascript'>
   var timeLeft = $('#timeleft').text();
