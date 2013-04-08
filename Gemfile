@@ -14,6 +14,7 @@ gem 'carrierwave'
 gem 'cloudinary'
 gem 'pg'
 gem 'jquery-star-rating-rails'
+gem 'faker'
 
 # Gems used only for assets and not required
 # in production environments by default.
