@@ -110,9 +110,10 @@
         <% rating = user_photo_rating(@winning_photo).last.value if user_photo_rating(@winning_photo) %>
 
         <% if rating %>
-          <li>You rated this photo <%= rating %> stars</li>
+          <li>You rated this photo <%= rating %> stars.</li>
         <% else %>
-          <li class="<%= dom_id(@winning_photo) %>-rate">Rate this photo:
+          <li class="<%= dom_id(@winning_photo) %>-rate">
+            Rate this photo:
             <div>
               <input name="<%= dom_id(@winning_photo) %>" type="radio" data-value="1" class="star click-star" id="1,<%= @winning_photo.id %>"/>
               <input name="<%= dom_id(@winning_photo) %>" type="radio" data-value="2" class="star click-star" id="2,<%= @winning_photo.id %>"/>
