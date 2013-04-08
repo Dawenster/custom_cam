@@ -5,7 +5,7 @@ gem 'rails', '3.2.12'
 
 # This will change if we use a different database.
 # We'll just use sqlite for now
-gem 'sqlite3'
+# gem 'sqlite3'
 gem 'jquery-rails'
 gem 'formtastic'
 gem 'bcrypt-ruby'
