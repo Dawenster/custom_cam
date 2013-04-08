@@ -3,25 +3,20 @@
 <%= form_for @contest do |f| %>
 <div>
   <%= f.label :title %>
-  <%= f.text_field :title %>
+  <%= f.text_field :title, :class => "desc_box" %>
   <%= f.label :category %>
   <%= f.select :category, @categories.map { |c| [c.title, c.id] } %>
   <%= f.label :description %>
-  <%= f.text_area :description, :placeholder => "Enter your contest details here" %>
-  <%= f.label :price %>
-  <%= f.text_field :price %>
+  <%= f.text_area :description, :rows => 5, :class => "desc_box", :placeholder => "Enter your contest details here" %>
+  <%= f.label :price, "Set Bounty" %>
+  $<%= f.text_field :price, :class => "integer_box" %>
   <%= f.label :duration %>
-  <%= radio_button_tag(:duration, 3) %>
-  <%= label_tag(:duration, "3 days") %>
-  <%= radio_button_tag(:duration, 5) %>
-  <%= label_tag(:duration, "5 days") %>
-  <%= radio_button_tag(:duration, 7) %>
-  <%= label_tag(:duration, "7 days") %>
+  <%= radio_button_tag(:duration, 3, true) %> 3 Days<br>
+  <%= radio_button_tag(:duration, 5) %> 5 Days<br>
+  <%= radio_button_tag(:duration, 7) %> 7 Days<br>
   <br>
   <%= f.submit "Submit!" %>
 </div>
 <% end %>
 
 <%= link_to "Back to Index", root_path %>
-<p>(Adding field for duration)</p>
-

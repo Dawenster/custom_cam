@@ -5,6 +5,7 @@ class ContestsController < ApplicationController
 
   def show
     @contest = Contest.find(params[:id])
+    @creator = User.find(@contest.creator_id)
     @time_left = @contest.created_at + (@contest.duration * 86400) - Time.now
     @photos = Photo.where('contest_id =?', params[:id])
     @winning_photo = Photo.find(@contest.winning_photo_id) if @contest.winning_photo_id

@@ -1,18 +1,21 @@
 img.lp {
   border: 1px solid #000;
+  margin-left: 20px;
 }
 
 h1.lp {
-  font-family: 'Fugaz One';
+  font-family: 'PT Sans';
   font-size: 3.2em;
-  letter-spacing: -2px;
+  letter-spacing: -1px;
   color: #517736;
-  text-shadow: 2px 2px 2px #222;
+  text-shadow: 1px 1px 1px #222;
   margin-bottom: 10px;
+  margin-left: 20px;
 }
 
 h2.lp {
   margin-bottom: 10px;
+  margin-left: 20px;
 }
 
 p.lp {
@@ -21,6 +24,7 @@ p.lp {
   font-size: 16px;
   font-family: 'Lato';
   line-height: 20px;
+  margin-left: 20px;
 }
 
 #lpcenter {
@@ -42,7 +46,7 @@ div.vp {
   width: 900px;
   border: 1px solid #517736;
   border-radius: 10px;
-  background-color: #A7C394;
+  background-color: #C5E5AF;
 }
 
 h1.vp {
@@ -83,7 +87,8 @@ h2.vp3 {
 }
 
 #green {
-  color: #2E441F;
+  color: #507736;
+  font-style: italic;
 }
 
 ul.vp li.vp3 {

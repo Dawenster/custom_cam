@@ -6,6 +6,7 @@
       <li><h3><%= link_to contest.title, contest %></h3></li>
       <li><span class="bounty">Bounty: $<%= contest.price %></span></li>
       <li>Posted by: <%= User.find(contest.creator_id).username %></li>
+      <li><strong>Description:</strong> <%= contest.description %></li>
     </ul>
   <% end %>
 </div>

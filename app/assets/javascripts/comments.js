@@ -11,8 +11,8 @@ var Comment = {
     
   appendComment: function(event, data) {
     $('li#comment_errors').hide();
-    $(this).siblings("ul").append('<li>' + data.comment.content + '</li>');
-    $(this).siblings("ul").append('<div class="posted_by">Posted by: ' + data.user.username + '</div>'); //Can add deleteIcon in the future
+    $(this).siblings("ul").prepend('<div class="posted_by">Posted by: ' + data.user.username + '</div>');
+    $(this).siblings("ul").prepend('<li class="comment">' + data.comment.content + '</li>'); //Can add deleteIcon in the future
   },
 
   showErrors: function(xhr, data, status) {
@@ -29,7 +29,7 @@ var Comment = {
   },
 
   deleteComment: function() {
-    $(this).parent('li').hide('slow');
+    $(this).parent().parent('li').hide('slow');
   }
 }
 

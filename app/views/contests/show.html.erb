@@ -1,4 +1,4 @@
-<div id='timeleft' style='visibility:hidden'><%= @time_for_countdown if @time_left > 0 %></div> 
+<!-- <div id='timeleft' style='visibility:hidden'><%#= @time_for_countdown if @time_left > 0 %></div> 
 
 
 <script type='text/javascript'>
@@ -21,37 +21,50 @@
        <div>Seconds</div>
     </div>
   </div>
+
+-->
+
 <div class="row"> 
   <div class="span5">
-    <h1><%= @contest.title %></h1>
-    <p><strong>Created By:</strong> <%= User.find(@contest.creator_id).username %></p>
-    <p><strong>Category:</strong> <%= @contest.category.title %></p>
-    <p><strong>Description:</strong> <%= @contest.description %></p>
-    <p><strong>Bounty:</strong> $<%= @contest.price %></p>
-    <p><strong>Time left:</strong> <%= @time_left > 0 ? (humanize(@time_left) ) : "Contest Over!" %></p>
+    <div class="contest_description">
+      <h1 id="contest_title"><%= @contest.title %></h1>
+      <div class="posted_by">
+        Created By: <%= link_to @creator.username, @creator %> in <%= link_to @contest.category.title, category_path(@contest.category) %>
+      </div>
+      <div id="description">
+        <%= simple_format(@contest.description) %>
+      </div>
+      <p><span class="bounty"><strong>Bounty:</strong> $<%= @contest.price %></span></p>
+      <p><strong>Time left:</strong> <%= @time_left > 0 ? (humanize(@time_left) ) : "Contest Over!" %></p>
+    </div>
 
 <!-- UPLOAD -->
-
-    <% if current_user %>
-      <% if @time_left > 0 && current_user.photographer %>
-        <%= form_tag photos_path, :method => 'post', :multipart => true do %>
-          <label for="file"><h3>Submit a Photo</h3></label>
-          <%= file_field_tag "file" %>
-          <%= hidden_field_tag :contest_id, params[:id] %>
-            <%= label_tag(:description, "Photo Description: (optional)") %>
-            <%= text_area_tag :description, nil, :rows => 2, :class => "desc_box" %><BR>
+  
+  <% if current_user %>
+    <% if @time_left > 0 && current_user.photographer %>
+      <div class="wrapper">
+      <%= form_tag photos_path, :method => 'post', :multipart => true do %>
+        <label for="file"><h3>Submit a Photo</h3></label>
+        <%= file_field_tag "file" %>
+        <%= hidden_field_tag :contest_id, params[:id] %>
+          <%= label_tag(:description, "Photo Description:") %>
+          <%= text_area_tag :description, nil, :rows => 2, :class => "small_desc_box", :placeholder => "(Optional)" %>
+          <div class="push_right">
             <%= submit_tag "Submit Photo", :class => "btn btn-success btn-primary" %>
-          
-        <% end %>
+          </div>
       <% end %>
+      </div>
     <% end %>
+  <% end %>
+  
 
 <!-- COMMENTS -->
+  <div class="wrapper">
     <h3>Contest Comments (<%= @comments.count %>):</h3>
     <ul class="comments">
       <% @comments.reverse.each do |comment| %>
         <li class="comment">
-          <%= comment.content %><br>
+          <%= simple_format(comment.content) %>
           <div class="posted_by">
             Posted by: <%= link_to comment.user.username, user_path(comment.user) %>
             <% if comment.user == current_user %>
@@ -64,12 +77,14 @@
     </ul>
       <% if current_user %>
         <%= form_for [@contest, Comment.new], :remote => true do |f| %>
-        <%= f.text_area :content, :rows => 5, :class => "desc_box", :placeholder => "Comment on this contest" %><br>
-        <%= f.submit "Add Comment", :class => "btn btn-success" %>
+        <%= f.text_area :content, :rows => 5, :class => "small_desc_box", :placeholder => "Comment on this contest" %>
+        <div class="push_right">
+          <%= f.submit "Add Comment", :class => "btn btn-success" %>
+        </div>
         <% end %>
       <% end %>
     </div>
-
+  </div>
 <!-- RIGHT SIDE -->
 
   <div class="span7">
@@ -99,7 +114,7 @@
           <%= @winning_photo.description %>
         </li> 
         <div class="posted_by">
-          Submitted by: <%= @winning_photo.user.username %>
+          Submitted by: <%= link_to @winning_photo.user.username, user_path(@winning_photo.user) %>
         </div> 
         <li class="<%= dom_id(@winning_photo) %>">
           <%= link_to @winning_photo.comments.count.to_s + ' comments', @winning_photo %> 
@@ -127,64 +142,68 @@
 <!-- PHOTO SUBMISSIONS -->
 
     <h1 id="center">All Submissions</h1>
-
-    <% @photos.reverse.each do |photo| %>
-      <div id="<%= dom_id(photo) %>" class="lightbox hide fade"  tabindex="-1" role="dialog" aria-hidden="true">
-        <div class='lightbox-header'>
-          <button type="button" class="close" data-dismiss="lightbox" aria-hidden="true">&times;</button>
-        </div>
-        <div class='lightbox-content'>
-          <%= image_tag photo.url %>
-          <div class="lightbox-caption">
-            <p><%= photo.description %></p>
+    <% if @photos.count > 0 %>
+      <% @photos.reverse.each do |photo| %>
+        <div id="<%= dom_id(photo) %>" class="lightbox hide fade"  tabindex="-1" role="dialog" aria-hidden="true">
+          <div class='lightbox-header'>
+            <button type="button" class="close" data-dismiss="lightbox" aria-hidden="true">&times;</button>
+          </div>
+          <div class='lightbox-content'>
+            <%= image_tag photo.url %>
+            <div class="lightbox-caption">
+              <p><%= photo.description %></p>
+            </div>
           </div>
         </div>
-      </div>
-      
-      <% unless photo == @winning_photo %>
-        <div class="each-photo-submission">
-          <div class="photo-and-button">
-            <% if @winning_photo == nil && @time_left < 0 && current_user == @contest.user %>
-              <button type="button" class="btn btn-large btn-success winner-button hide" data-photo="<%= photo.id %>" data-contest="<%= @contest.id %>">Select as winner</button>
-            <% end %>
-            <a data-toggle="lightbox" href="#<%= dom_id(photo) %>">
-              <%= cl_image_tag photo.url, :width => 500, :height => 400, :gravity => :face, :crop => :thumb %>
-            </a>
+        
+        <% unless photo == @winning_photo %>
+          <div class="each-photo-submission">
+            <div class="photo-and-button">
+              <% if @winning_photo == nil && @time_left < 0 && current_user == @contest.user %>
+                <button type="button" class="btn btn-large btn-success winner-button hide" data-photo="<%= photo.id %>" data-contest="<%= @contest.id %>">Select as winner</button>
+              <% end %>
+              <a data-toggle="lightbox" href="#<%= dom_id(photo) %>">
+                <%= cl_image_tag photo.url, :width => 500, :height => 400, :gravity => :face, :crop => :thumb %>
+              </a>
 
-          </div>
-          <li class="description">
-            <%= photo.description %>
-          </li>
-          <div class="posted_by">
-            Submitted by: <%= photo.user.username %>
-          </div>
-
-          <% if photo.ratings != [] %>
-            <% ratings = photo.ratings.map { |rating| rating.value } %>
-            <% average_rating = (ratings.inject{ |sum, el| sum + el }.to_f / ratings.size).round %>
-          <% else %>
-            <% average_rating = "No ratings yet" %>
-          <% end %>
-
-          <li class="<%= dom_id(photo) %>"><%= link_to photo.comments.count.to_s + ' comments', photo %> 
-           | Current rating: <%= render "ratings", :average_rating => average_rating %>
-        </li>
-          <% rating = user_photo_rating(photo).last.value if user_photo_rating(photo) %>
-          <% if rating %>
-            <li>You rated this photo <%= rating %> stars</li>
-          <% else %>
-            <li class="<%= dom_id(photo) %>-rate">Rate this photo:
-              <div>
-                <input name="<%= dom_id(photo) %>" type="radio" data-value="1" class="star click-star" id="1,<%= photo.id %>"/>
-                <input name="<%= dom_id(photo) %>" type="radio" data-value="2" class="star click-star" id="2,<%= photo.id %>"/>
-                <input name="<%= dom_id(photo) %>" type="radio" data-value="3" class="star click-star" id="3,<%= photo.id %>"/>
-                <input name="<%= dom_id(photo) %>" type="radio" data-value="4" class="star click-star" id="4,<%= photo.id %>"/>
-                <input name="<%= dom_id(photo) %>" type="radio" data-value="5" class="star click-star" id="5,<%= photo.id %>"/>
-              </div>
+            </div>
+            <li class="description">
+              <%= simple_format(photo.description) %>
             </li>
-          <% end %>
-        </div>
+            <div class="posted_by">
+              Submitted by: <%= link_to photo.user.username, user_path(photo.user) %>
+            </div>
+
+            <% if photo.ratings != [] %>
+              <% ratings = photo.ratings.map { |rating| rating.value } %>
+              <% average_rating = (ratings.inject{ |sum, el| sum + el }.to_f / ratings.size).round %>
+            <% else %>
+              <% average_rating = "No ratings yet" %>
+            <% end %>
+
+            <li class="<%= dom_id(photo) %>"><%= link_to photo.comments.count.to_s + ' comments', photo %> 
+             | Current rating: <%= render "ratings", :average_rating => average_rating %>
+          </li>
+            <% rating = user_photo_rating(photo).last.value if user_photo_rating(photo) %>
+            <% if rating %>
+              <li>You rated this photo <%= rating %> stars</li>
+            <% else %>
+              <li class="<%= dom_id(photo) %>-rate">Rate this photo:
+                <div>
+                  <input name="<%= dom_id(photo) %>" type="radio" data-value="1" class="star click-star" id="1,<%= photo.id %>"/>
+                  <input name="<%= dom_id(photo) %>" type="radio" data-value="2" class="star click-star" id="2,<%= photo.id %>"/>
+                  <input name="<%= dom_id(photo) %>" type="radio" data-value="3" class="star click-star" id="3,<%= photo.id %>"/>
+                  <input name="<%= dom_id(photo) %>" type="radio" data-value="4" class="star click-star" id="4,<%= photo.id %>"/>
+                  <input name="<%= dom_id(photo) %>" type="radio" data-value="5" class="star click-star" id="5,<%= photo.id %>"/>
+                </div>
+              </li>
+            <% end %>
+          </div>
+        <% end %>
       <% end %>
+    <% else %>
+      <p>No photos have been submitted.</p>
+      <p>To upload a photo for this contest, use the box on the left.</p>
     <% end %>
   </div>
 </div>

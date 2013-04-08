@@ -8,6 +8,8 @@
 
 /* universal */
 
+
+
 html {
   overflow-y: scroll;
 }
@@ -15,6 +17,7 @@ html {
 body {
   padding-top: 90px;
   font-family: 'Lato';
+  background-image: url('/assets/bg%20copy.png');
 }
 
 a {
@@ -28,11 +31,6 @@ section {
   overflow: auto;
 }
 
-/* Why doesn't this work on just input, textarea, etc? */
-input#question_title, textarea#question_content, textarea#answer_content {
-  width: 560px;
-
-}
 textarea#answer_content {
   height: 5em;
 }
@@ -74,6 +72,11 @@ h2 {
   color: $grayLight;
 }
 
+h3 {
+  margin-top: 16px;
+  color: #507736;
+}
+
 p {
   font-size: 1.1em;
   line-height: 0.8em;
@@ -82,10 +85,16 @@ p {
 li {
   list-style: none;
   line-height: 1em;
+  padding: 3px 0px;
+  &.description p {
+    margin: 1px;
+  }
 }
 
 li.comment {
   list-style: decimal;
+  line-height: 0px;
+  margin-bottom: 5px;
 }
 
 ul.profile {
@@ -167,9 +176,72 @@ input#file {
 }
 
 .desc_box {
-  width: 380px;
+  width: 366px;
 }
 
+.small_desc_box {
+  width: 344px;
+}
+
+.integer_box {
+  width: 50px;
+}
+
+p#description {
+  margin: 20px 0px;
+  padding-left: 10px;
+  line-height: 14px;
+}
+
+.push_right{
+  text-align: right;
+}
+
+.span5{
+  margin-left: 0px;
+}
+
+.contest_description p {
+  font-size: 16px;
+  line-height: 20px;
+  margin-bottom: 15px;
+}
+
+div#description {
+  padding-left: 15px;
+}
+
+.contest_description .bounty {
+  margin-left: 0px;
+}
+
+.wrapper, .photo_wrapper {
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #eee;
+  margin-bottom: 10px;
+  &:hover{
+    background-color: #DBFFC2;
+  }
+}
+
+.photo_wrapper {
+  margin-top: 10px;
+  &:hover{
+    background-color: #eee;
+  }
+}
+
+#contest_title {
+  margin-bottom: 0px;
+  font-style: italic;
+}
+
+nav ul li a{
+  font-size: 16px;
+
+}
 
 input[type=submit] {
     

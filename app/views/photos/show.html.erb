@@ -1,25 +1,27 @@
 <div class="photo_show">
 <%= image_tag @photo.url %>
-
-<ul class="comments">
-  <% @photo.comments.each do |comment| %>
-  <li><%= comment.content %>
-    Posted by: <%= comment.user.username %> 
-    <% if comment.user == current_user %>
-      <%= link_to '', photo_comment_path(@photo, comment), 
-          :class => 'icon-remove', :remote => true, :method => 'delete' %>
+<div class="photo_wrapper">
+  <h3>Contest Comments (<%= @photo.comments.count %>):</h3>
+  <ul class="comments">
+    <% @photo.comments.reverse.each do |comment| %>
+    <li class="comment">
+      <%= simple_format(comment.content) %><br>
+      <div class="posted_by">
+         Posted by: <%= link_to comment.user.username, user_path(comment.user) %>
+        <% if comment.user == current_user %>
+          <%= link_to '', photo_comment_path(@photo, comment), 
+            :class => 'icon-remove', :remote => true, :method => 'delete' %>
+        <% end %>
+      </div>
+    </li>
     <% end %>
-  </li>
-  <% end %>
-</ul>
-
-<p>Add new comment:</p>
+  </ul>
   <%= form_for [@photo, Comment.new], :remote => true do |f| %>
-    <%= f.label :content %>
-    <%= f.text_area :content, :placeholder => "Comment" %><br>
-    <%= f.submit "Submit", :class => "btn btn-primary" %>
+    <%= f.label :content, "Add a Comment:" %>
+    <%= f.text_area :content, :rows => 10, :class => "desc_box" %><br>
+    <%= f.submit "Add Comment", :class => "btn btn-primary" %>
   <% end %>
-
+</div>
 <%= link_to "Back to Contest", contest_path(@photo.contest) %>
 </div>
 
