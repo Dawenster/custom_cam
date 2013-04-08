@@ -356,8 +356,8 @@
 			
 			//NB.: These don't need to be pre-defined (can be undefined/null) so let's save some code!
 			//half:     false,         // just a shortcut to control.split = 2
-			//required: false,         // disables the 'cancel' button so user can only select one of the specified values
-			//readOnly: false,         // disable rating plugin interaction/ values cannot be.one('change',		//focus:    function(){},  // executed when stars are focused
+			required: false,         // disables the 'cancel' button so user can only select one of the specified values
+			readOnly: false,         // disable rating plugin interaction/ values cannot be.one('change',		//focus:    function(){},  // executed when stars are focused
 			//blur:     function(){},  // executed when stars are focused
 			//callback: function(){},  // executed when a star is clicked
  }; //} });

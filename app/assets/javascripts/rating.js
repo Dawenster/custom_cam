@@ -13,7 +13,7 @@ $(document).ready(function($) {
       console.log(data.unround)
     })
     .fail(function(data) {
-      alert(data);
+      alert("You must login to rate photos!");
     })
   })
 });

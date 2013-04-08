@@ -29,7 +29,7 @@
     <p><strong>Category:</strong> <%= @contest.category.title %></p>
     <p><strong>Description:</strong> <%= @contest.description %></p>
     <p><strong>Bounty:</strong> $<%= @contest.price %></p>
-    <p><strong>Time left:</strong> <%= @time_left > 0 ? ("Days Left :" + humanize(@time_left) ) : "CONTEST OVER" %></p>
+    <p><strong>Time left:</strong> <%= @time_left > 0 ? (humanize(@time_left) ) : "Contest Over!" %></p>
 
 <!-- UPLOAD -->
 
@@ -49,7 +49,6 @@
     <% end %>
 
 <!-- COMMENTS -->
-
     <h3>Contest Comments (<%= @comments.count %>):</h3>
     <ul class="comments">
       <% @comments.each do |comment| %>
@@ -65,13 +64,12 @@
         </li>
       <% end %>
     </ul>
-
-    <%= form_for [@contest, Comment.new], :remote => true do |f| %>
-      <div>
+      <% if current_user %>
+        <%= form_for [@contest, Comment.new], :remote => true do |f| %>
         <%= f.text_area :content, :size => "50x10", :placeholder => "Comment on this contest" %><br>
         <%= f.submit "Submit Comment", :class => "btn btn-large btn-primary" %>
-      </div>
-    <% end %>
+        <% end %>
+      <% end %>
     </div>
 
 <!-- RIGHT SIDE -->
@@ -81,7 +79,7 @@
 <!-- WINNER PHOTO -->
 
     <% if @winning_photo %>
-      <h1>Winner!</h1>
+      <h1 id="center">Winner!</h1>
 
       <% if @winning_photo.ratings != [] %>
         <% ratings = @winning_photo.ratings.map { |rating| rating.value } %>
@@ -109,17 +107,19 @@
           <%= link_to @winning_photo.comments.count.to_s + ' comments', @winning_photo %> 
           | Current rating: <%= render "ratings", :average_rating => average_rating %>
         </li>
-        <% rating = user_photo_rating(@winning_photo).last.value if user_photo_rating(@winning_photo).last %>
+        <% rating = user_photo_rating(@winning_photo).last.value if user_photo_rating(@winning_photo) %>
 
         <% if rating %>
           <li>You rated this photo <%= rating %> stars</li>
         <% else %>
           <li class="<%= dom_id(@winning_photo) %>-rate">Rate this photo:
-            <input name="<%= dom_id(@winning_photo) %>" type="radio" data-value="1" class="star click-star" id="1,<%= @winning_photo.id %>"/>
-            <input name="<%= dom_id(@winning_photo) %>" type="radio" data-value="2" class="star click-star" id="2,<%= @winning_photo.id %>"/>
-            <input name="<%= dom_id(@winning_photo) %>" type="radio" data-value="3" class="star click-star" id="3,<%= @winning_photo.id %>"/>
-            <input name="<%= dom_id(@winning_photo) %>" type="radio" data-value="4" class="star click-star" id="4,<%= @winning_photo.id %>"/>
-            <input name="<%= dom_id(@winning_photo) %>" type="radio" data-value="5" class="star click-star" id="5,<%= @winning_photo.id %>"/>
+            <div>
+              <input name="<%= dom_id(@winning_photo) %>" type="radio" data-value="1" class="star click-star" id="1,<%= @winning_photo.id %>"/>
+              <input name="<%= dom_id(@winning_photo) %>" type="radio" data-value="2" class="star click-star" id="2,<%= @winning_photo.id %>"/>
+              <input name="<%= dom_id(@winning_photo) %>" type="radio" data-value="3" class="star click-star" id="3,<%= @winning_photo.id %>"/>
+              <input name="<%= dom_id(@winning_photo) %>" type="radio" data-value="4" class="star click-star" id="4,<%= @winning_photo.id %>"/>
+              <input name="<%= dom_id(@winning_photo) %>" type="radio" data-value="5" class="star click-star" id="5,<%= @winning_photo.id %>"/>
+            </div>
           </li>
         <% end %>
       </div>
@@ -127,7 +127,7 @@
 
 <!-- PHOTO SUBMISSIONS -->
 
-    <h1>All submissions</h1>
+    <h1 id="center">All Submissions</h1>
 
     <% @photos.reverse.each do |photo| %>
       <div id="<%= dom_id(photo) %>" class="lightbox hide fade"  tabindex="-1" role="dialog" aria-hidden="true">
@@ -170,16 +170,18 @@
           <li class="<%= dom_id(photo) %>"><%= link_to photo.comments.count.to_s + ' comments', photo %> 
            | Current rating: <%= render "ratings", :average_rating => average_rating %>
         </li>
-          <% rating = user_photo_rating(photo).last.value if user_photo_rating(photo).last %>
+          <% rating = user_photo_rating(photo).last.value if user_photo_rating(photo) %>
           <% if rating %>
             <li>You rated this photo <%= rating %> stars</li>
           <% else %>
             <li class="<%= dom_id(photo) %>-rate">Rate this photo:
-              <input name="<%= dom_id(photo) %>" type="radio" data-value="1" class="star click-star" id="1,<%= photo.id %>"/>
-              <input name="<%= dom_id(photo) %>" type="radio" data-value="2" class="star click-star" id="2,<%= photo.id %>"/>
-              <input name="<%= dom_id(photo) %>" type="radio" data-value="3" class="star click-star" id="3,<%= photo.id %>"/>
-              <input name="<%= dom_id(photo) %>" type="radio" data-value="4" class="star click-star" id="4,<%= photo.id %>"/>
-              <input name="<%= dom_id(photo) %>" type="radio" data-value="5" class="star click-star" id="5,<%= photo.id %>"/>
+              <div>
+                <input name="<%= dom_id(photo) %>" type="radio" data-value="1" class="star click-star" id="1,<%= photo.id %>"/>
+                <input name="<%= dom_id(photo) %>" type="radio" data-value="2" class="star click-star" id="2,<%= photo.id %>"/>
+                <input name="<%= dom_id(photo) %>" type="radio" data-value="3" class="star click-star" id="3,<%= photo.id %>"/>
+                <input name="<%= dom_id(photo) %>" type="radio" data-value="4" class="star click-star" id="4,<%= photo.id %>"/>
+                <input name="<%= dom_id(photo) %>" type="radio" data-value="5" class="star click-star" id="5,<%= photo.id %>"/>
+              </div>
             </li>
           <% end %>
         </div>
