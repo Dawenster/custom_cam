@@ -39,11 +39,10 @@
           <label for="file"><h3>Submit a Photo</h3></label>
           <%= file_field_tag "file" %>
           <%= hidden_field_tag :contest_id, params[:id] %>
-          <div id="input_desc">
-            <%= label_tag(:description, "Photo Description:") %>
-            <%= text_area_tag(:description) %><BR>
-            <%= submit_tag "Submit!", :class => "btn btn-primary" %>
-          </div>
+            <%= label_tag(:description, "Photo Description: (optional)") %>
+            <%= text_area_tag :description, nil, :rows => 2, :class => "photo_desc" %><BR>
+            <%= submit_tag "Submit Photo", :class => "btn btn-success btn-primary" %>
+          
         <% end %>
       <% end %>
     <% end %>
@@ -67,7 +66,7 @@
       <% if current_user %>
         <%= form_for [@contest, Comment.new], :remote => true do |f| %>
         <%= f.text_area :content, :size => "50x10", :placeholder => "Comment on this contest" %><br>
-        <%= f.submit "Submit Comment", :class => "btn btn-large btn-primary" %>
+        <%= f.submit "Submit Comment", :class => "btn btn-success" %>
         <% end %>
       <% end %>
     </div>
