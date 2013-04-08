@@ -1,10 +1,10 @@
 <div>
-  <h1>All contests</h1>
+  <h1>Index of All Contests</h1>
   <% @contests.each do |contest| %>
-    <div><%= contest.title %></div>
+    <div><%= link_to contest.title, contest %></div>
     <div>Created by: <%= contest.user.username %></div>
     <div>Category: <%= contest.category.title %></div>
-    <div>Price: $<%= contest.price %></div>
+    <div>Bounty: $<%= contest.price %></div>
     <div>Description: <%= contest.description %></div>
     <BR>
   <% end %>
