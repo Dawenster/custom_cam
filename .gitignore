@@ -14,7 +14,7 @@
 /log/*.log
 /tmp
 
-/config/initializers/cloudinary.rb
+/config/initializers/a-codes.rb
 /config/cloudinary.yml
 
 /public/uploads/tmp/
