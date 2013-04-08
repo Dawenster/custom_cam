@@ -40,7 +40,7 @@ class ApplicationController < ActionController::Base
         i += 1
       end
     end
-    correct_num  
+    correct_num
   end
 
   helper_method :humanize, :countdown_num
