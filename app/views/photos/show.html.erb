@@ -1,7 +1,7 @@
 <div class="photo_show">
 <%= image_tag @photo.url %>
 <div class="photo_wrapper">
-  <h3>Contest Comments (<%= @photo.comments.count %>):</h3>
+  <h3>Photo Comments (<%= @photo.comments.count %>):</h3>
   <ul class="comments">
     <% @photo.comments.reverse.each do |comment| %>
     <li class="comment">
