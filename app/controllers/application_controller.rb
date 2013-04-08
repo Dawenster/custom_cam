@@ -18,13 +18,21 @@ class ApplicationController < ActionController::Base
   end
 
   def countdown_num(num)
-    matches = num.match ( /(\d{0,2}):(\d{0,2}):(\d{0,2}):(\d{0,2})/ )
+    if num.length > 5
+      num.insert(0,"00:")
+    elsif num.length > 2
+      num.insert(0,"00:00:")
+    else
+      num.insert(0,"00:00:00:")
+    end
+
+    matches = num.match ( /(\d{0,2}):(\d{0,2}):(\d{0,2}):(\d{0,2})/ ) 
     correct_num = ""
-    puts matches
     i = 1
     first = true
+    
     ((matches.length) -1 ).times do
-      if matches[i].length == 1 && first == false
+      if matches[i].length == 1 && first == false 
         correct_num << (":0" + matches[i] )
         i += 1
       elsif matches[i].length == 1 && first == true
