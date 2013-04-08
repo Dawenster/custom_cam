@@ -40,7 +40,7 @@
           <%= file_field_tag "file" %>
           <%= hidden_field_tag :contest_id, params[:id] %>
             <%= label_tag(:description, "Photo Description: (optional)") %>
-            <%= text_area_tag :description, nil, :rows => 2, :class => "photo_desc" %><BR>
+            <%= text_area_tag :description, nil, :rows => 2, :class => "desc_box" %><BR>
             <%= submit_tag "Submit Photo", :class => "btn btn-success btn-primary" %>
           
         <% end %>
@@ -50,11 +50,11 @@
 <!-- COMMENTS -->
     <h3>Contest Comments (<%= @comments.count %>):</h3>
     <ul class="comments">
-      <% @comments.each do |comment| %>
+      <% @comments.reverse.each do |comment| %>
         <li class="comment">
           <%= comment.content %><br>
           <div class="posted_by">
-            Posted by: <%= comment.user.username %>
+            Posted by: <%= link_to comment.user.username, user_path(comment.user) %>
             <% if comment.user == current_user %>
               <%= link_to '', contest_comment_path(@contest, comment), 
                   :class => 'icon-remove', :remote => true, :method => 'delete' %>
@@ -65,8 +65,8 @@
     </ul>
       <% if current_user %>
         <%= form_for [@contest, Comment.new], :remote => true do |f| %>
-        <%= f.text_area :content, :size => "50x10", :placeholder => "Comment on this contest" %><br>
-        <%= f.submit "Submit Comment", :class => "btn btn-success" %>
+        <%= f.text_area :content, :rows => 5, :class => "desc_box", :placeholder => "Comment on this contest" %><br>
+        <%= f.submit "Add Comment", :class => "btn btn-success" %>
         <% end %>
       <% end %>
     </div>
