@@ -1,0 +1,48 @@
+<link href='http://fonts.googleapis.com/css?family=Fugaz+One' rel='stylesheet' type='text/css'>
+
+<div class="row">
+  <div class="span5">
+    <%= (cl_image_tag(@last_photo, :transformation => {:width => 400, :height => 300, :crop => :thumb}, :class => "lp" )) %>
+    <h6>Most Recent Image</h6>
+  </div>  
+  <div class="span7">
+  <h1 class="lp">Say Hi To Your Personal Photographer Army</h1>
+    <h2 class="lp">CustomCam connects you to photographers worldwide</h2>
+    <p class="lp">We help people in need of custom photo projects but don't have the special tools or know-how.
+      Office in San Francisco but need a custom photo of the Eiffel Tower? 
+      Our photographers are global. There's no limit to what you can request with the power of CustomCam.
+    </p>
+    <div id="lpcenter">
+    <%= link_to "Start a Photo Contest", new_user_path, :class => "lpcenter btn btn-primary btn-large btn-success" %>
+    </div>
+  </div>
+</div>
+<div class="vp">
+  <h1 class="vp">How does it work?</h1>
+  <ul class="vp">
+    <li><span id="numvp">1. </span>Describe your project and set your budget</li>
+    <li><span id="numvp">2. </span>Post your contest and the entries roll in</li>
+    <li><span id="numvp">3. </span>When the contest is over, select a winner</li>
+    <li><span id="numvp">4. </span>We'll handle the rest!</li>
+  </ul>
+  <h2 class="vp2">Safe and Secure</h2>
+  <ul class="vp">
+    <li>We'll transfer the IP to you when the contest is over</li>
+    <li>100% Money-back Guarantee!</li>
+  </ul>
+  <div id="lpcenter">
+    <%= link_to "Start a Photo Contest", new_user_path, :class => "btn btn-primary btn-large btn-success" %>
+  </div>
+</div>
+
+<h1 class="vp3">Are you a photographer?</h1>
+<h2 class="vp3">Use CustomCam to make <span id="green">$</span> doing what you love</h2>
+<ul class="vp">
+  <li class="vp3">Browse our contests for free</li>
+  <li class="vp3">Take on projects that interest you</li>
+  <li class="vp3">We'll handle intellectual property and money transfer</li>
+</ul>
+<div id="lpcenter">
+  <%= link_to "Signup now!", new_user_path, :class => "btn btn-primary btn-large btn-success" %>
+</div>
+

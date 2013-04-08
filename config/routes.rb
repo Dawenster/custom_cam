@@ -1,5 +1,6 @@
 CustomCam::Application.routes.draw do
-  root :to => "categories#index"
+  root :to => "static_pages#index"
+  resources :static_pages, :only => [:index]
   resources :users
   resources :sessions, :only => [:new, :create, :destroy]
 
