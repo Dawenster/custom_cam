@@ -15,7 +15,7 @@ h1.lp {
 
 h2.lp {
   margin-bottom: 10px;
-  margin-left: 20px;
+  margin-left: 10px;
 }
 
 p.lp {
@@ -37,6 +37,8 @@ h6 {
   margin: 0px auto;
   font-size: 0.7em;
   color: #acacac;
+  margin-left: 20px;
+  padding-left: 20px;
 }
 
 div.vp {
@@ -51,6 +53,7 @@ div.vp {
 
 h1.vp {
   text-align: center;
+  text-shadow: 2px 2px 2px #A7C393;
 }
 
 ul.vp {
@@ -65,6 +68,7 @@ ul.vp {
 
 #numvp {
   font-size: 24px;
+  font-style: italic;
   font-color: #2E441F;
   font-family: 'Lato';
 }
@@ -97,14 +101,22 @@ ul.vp li.vp3 {
 }
 
 /* ABOUT US */
+h1#about {
+  margin-bottom: 10px;
+}
+
 h2.about {
-  font-size: 28px;
+  font-size: 32px;
   padding-left: 0px;
+  text-shadow: 1px 1px 1px #ccc;
+  color: #507736;
 }
 
 h3#about {
-  padding: 0px 20px;
-  margin-bottom: 20px;
+  padding: 0px 60px;
+  margin-top: 5px;
+  margin-bottom: 25px;
+  text-shadow: 1px 1px 1px #ccc;
 }
 
 p.about {
@@ -114,5 +126,13 @@ p.about {
 
 img.about {
   margin-bottom: 20px;
+}
+
+h3 a {
+  color: #2E441F;
+}
+
+#source a{
+  font-size: 0.5em;
 }
 

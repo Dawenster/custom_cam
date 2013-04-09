@@ -10,9 +10,9 @@ class ContestsController < ApplicationController
     @photos = Photo.where('contest_id =?', params[:id])
     @winning_photo = Photo.find(@contest.winning_photo_id) if @contest.winning_photo_id
     @comments = @contest.comments
-    if @time_left > 0
-      @time_for_countdown = countdown_num( humanize(@time_left).gsub(/days/, ':').gsub(/hours/, ':').gsub(/minutes/, ':').gsub(/seconds/, '').gsub(/\s/, "") )
-    end
+    # if @time_left > 0
+    #   @time_for_countdown = countdown_num( humanize(@time_left).gsub(/days/, ':').gsub(/hours/, ':').gsub(/minutes/, ':').gsub(/seconds/, '').gsub(/\s/, "") )
+    # end
   end
 
   def new
