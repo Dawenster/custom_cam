@@ -4,4 +4,4 @@ Custom Cam is a weekend project developed by 4 students during their 7th weekend
 
 It is a crowdsourced marketplace for photo contests that connects freelance photographers to instant jobs.
 
-Created by: David Wen[https://www.github.com/dawenster], [Gavin St. Ours](https://www.github.com/charmcitygavin), [Kevin Ko](https://www.github.com/heyimkko), [Philip Woo](https://www.github.com/jhw1202)
+Created by: David+Wen[https://www.github.com/dawenster], Gavin St. Ours[https://www.github.com/charmcitygavin], Kevin Ko[https://www.github.com/heyimkko], Philip Woo[https://www.github.com/jhw1202]
