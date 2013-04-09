@@ -10,4 +10,7 @@ class StaticPagesController < ApplicationController
       @last_photo = Photo.last.url if Photo.last #guest
     end
   end
+
+  def about
+  end
 end

@@ -14,6 +14,8 @@ CustomCam::Application.routes.draw do
 
   resources :ratings, :only => [:create, :update, :destroy]
 
+  get '/about' => "static_pages#about"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
