@@ -1,7 +1,7 @@
 == Custom Cam
 
-Custom Cam is a weekend project developed by 4 students during their 7th week at Dev Bootcamp. 
+Custom Cam is a weekend project developed by 4 students during their 7th weekend at Dev Bootcamp. 
 
 It is a crowdsourced marketplace for photo contests that connects freelance photographers to instant jobs.
 
-Created by: David Wen, Gavin St. Ours, Kevin Ko, Philip Woo
+Created by: [David Wen](https://www.github.com/dawenster), [Gavin St. Ours](https://www.github.com/charmcitygavin), [Kevin Ko](https://www.github.com/heyimkko), [Philip Woo](https://www.github.com/jhw1202)
