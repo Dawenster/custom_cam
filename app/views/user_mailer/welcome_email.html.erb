@@ -4,14 +4,15 @@
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
   </head>
   <body>
-    <h1>Welcome to CustomCam, <%= @user.username %>!!</h1>
+    <h1>Welcome to CustomCam, <%= @user.username %>!</h1>
     <p>
       Your username is: <%= @user.username %>.<br/>
-      If your photo ain't have a cat init, it's probably garbage.
+      <em>If your photo ain't have a cat in it, it's probably garbage.</em>
     </p>
     <p>
-      To login to the site, just follow this link: <%= @url %>.
+      To login to the site, just follow this link: <a href="http://morning-stream-9757.herokuapp.com/sessions/new">http://morning-stream-9757.herokuapp.com/sessions/new</a>.
     </p>
     <p>Thanks for joining and have a great day!</p>
+    <p>P.S. If this e-mail got to you in error, some bozo used your e-mail to sign up for our toy site. Sorry, lol.</p>
   </body>
 </html>
