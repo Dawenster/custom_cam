@@ -7,7 +7,7 @@ class StaticPagesController < ApplicationController
         redirect_to categories_path #photographer
       end
     else
-      @last_photo = Photo.find(14).url #Photo.last.url if Photo.last #Landing Page Pic
+      @last_photo = Photo.find(5).url #Photo.last.url if Photo.last #Landing Page Pic
     end
   end
 
