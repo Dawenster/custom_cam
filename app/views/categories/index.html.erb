@@ -6,4 +6,6 @@
 </ul>
 
 <h3>Most Recent Image:</h3>
-<%= image_tag Photo.last.url if Photo.last, :class => "center" %>
+<div class="center">
+  <%= image_tag Photo.last.url if Photo.last %>
+</div>
